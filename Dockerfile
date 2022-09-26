@@ -61,16 +61,7 @@ RUN apt-get clean -y\
   && rm -rf /var/lib/apt/lists/*
 COPY --link --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock ./
-ARG NOVA_USERNAME
-ARG NOVA_LICENSE_KEY
-# Please acquire the nova license key and add to your .env
-# https://nova.laravel.com/licenses/95fcc60f-1b1d-4f1c-8277-568e5caf7d1c
-# or use a global key and to your ~/.zshrc with: export NOVA_LICENSE_KEY=#keyhere
-RUN composer config \
-  --auth http-basic.nova.laravel.com \
-    "${NOVA_USERNAME}" \
-    "${NOVA_LICENSE_KEY}" \
-  && composer install \
+RUN composer install \
   --no-interaction \
   --no-dev \
   --no-plugins \
@@ -94,11 +85,6 @@ COPY --from=vite-build \
   /var/www/html/public/build public/build
 COPY --chown=www-data . .
 RUN php artisan package:discover --ansi
-ARG BRANCH=local
-ENV BRANCH=$BRANCH
-ARG SHA=000
-ENV SHA=$SHA
-ENV APP_ENV=production
 USER www-data
 HEALTHCHECK --start-period=1m \
   CMD ["./artisan", "schedule:list"]

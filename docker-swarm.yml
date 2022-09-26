@@ -4,15 +4,9 @@ x-place-sgp: &place-sgp
   constraints:
     - node.labels.region==sgp
 
-x-logging: &logging
-  options:
-    logzio-token: IHaDSPVgmnUKaNSymyCfdjCSeFQFqrmB
-    logzio-type: php
-
 x-app-defaults: &app
   networks:
     public:
-  logging: *logging
   deploy: &app-deploy
     replicas: 3
     update_config:
@@ -22,7 +16,6 @@ x-app-defaults: &app
     resources:
       limits:
         memory: 1.5G
-
 
 services:
   # production:
@@ -38,7 +31,7 @@ services:
   #       traefik.http.services.template_app-production.loadbalancer.server.port: 80
   staging:
     <<: *app
-    image: ghcr.io/r6digital/template:develop
+    image: ghcr.io/dh-92/cse3cax:develop
     secrets:
       - staging.env
     environment:
