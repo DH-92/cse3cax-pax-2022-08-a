@@ -1,0 +1,64 @@
+version: '3.8'
+
+x-place-sgp: &place-sgp
+  constraints:
+    - node.labels.region==sgp
+
+x-logging: &logging
+  options:
+    logzio-token: IHaDSPVgmnUKaNSymyCfdjCSeFQFqrmB
+    logzio-type: php
+
+x-app-defaults: &app
+  networks:
+    public:
+  logging: *logging
+  deploy: &app-deploy
+    replicas: 3
+    update_config:
+      order: start-first
+    restart_policy:
+      max_attempts: 1
+    resources:
+      limits:
+        memory: 1.5G
+
+
+services:
+  # production:
+  #   <<: *app
+  #   image: ghcr.io/r6digital/template:master
+  #   secrets:
+  #     - production.env
+  #   deploy:
+  #     <<: *app-deploy
+  #     labels:
+  #       traefik.region: sgp
+  #       traefik.hostname: template.r6internal.com
+  #       traefik.http.services.template_app-production.loadbalancer.server.port: 80
+  staging:
+    <<: *app
+    image: ghcr.io/r6digital/template:develop
+    secrets:
+      - staging.env
+    environment:
+      APP_ENV: staging
+    deploy:
+      <<: *app-deploy
+      labels:
+        traefik.region: sgp
+        traefik.http.services.template_app-staging.loadbalancer.server.port: 80
+        placement: *place-sgp
+
+networks:
+  public:
+    external: true
+
+secrets:
+  # production.env:
+  #   name: template-production-###
+  #   external: true
+
+  staging.env:
+    name: template-staging-###
+    external: true
