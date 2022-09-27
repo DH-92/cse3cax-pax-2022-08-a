@@ -39,7 +39,7 @@ ENV CADDY_PATH="${CADDY_PATH}"
 ADD --chown=www-data "${CADDY_SRC}" "${CADDY_PATH}"
 ADD --chown=www-data "${FPM_CONF_SRC}" "${FPM_CONF_PATH}"
 COPY --link --from=caddy-builder /usr/bin/caddy /usr/local/bin/caddy
-RUN caddy validate -config "${CADDY_PATH}" \
+RUN caddy validate --config "${CADDY_PATH}" \
   && chown www-data:www-data \
     /var/www/ \
     /var/run/
@@ -73,7 +73,8 @@ FROM node:16-alpine AS vite-build
 WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm install
-COPY resources vite.config.js ./
+COPY vite.config.js ./
+COPY resources resources
 RUN npm run build
 
 

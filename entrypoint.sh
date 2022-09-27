@@ -40,6 +40,7 @@ php artisan migrate --force || throw "-- failed to handle DB migrations - exitin
 if [[ $# -eq 0 ]]; then
     exec /usr/local/bin/caddy run --config "${CADDY_PATH}"
 fi
+
 # To start container without caddy use below in compose
 # commands: ['php-fpm']
 

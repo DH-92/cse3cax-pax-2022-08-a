@@ -13,6 +13,7 @@
 .lando.*yml
 .phpunit.result.cache
 docker-compose.*yml
+!docker-compose.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
