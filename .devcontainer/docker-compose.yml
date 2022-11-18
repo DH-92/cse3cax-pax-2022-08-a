@@ -1,0 +1,54 @@
+version: '3.8'
+
+volumes:
+  data_database:
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+    environment:
+      XDEBUG_MODE: debug # off|develop|coverage|debug|gcstats|profile|trace
+      XDEBUG_CONFIG: >-
+        discover_client_host=1
+        log=/app/storage/logs/xdebug.log
+        output_dir=/app/storage/xdebug
+        profiler_output_name=cachegrind.xdebug-profile-%H-%t-%r
+    volumes:
+      - ../:/var/www/html/
+    ports:
+      - 80
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: mysql:8
+    container_name: ${DB_HOST:-database}
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+       - 'data_database:/var/lib/mysql/'
+    ports:
+      - 3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_USER: ${DB_USERNAME:-laravel}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-laravel}
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025
+    logging:
+      driver: 'none'  # disable saving logs
+
+  cache:
+    image: redis:latest
+    ports:
+      - 6379

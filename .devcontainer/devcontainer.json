@@ -1,0 +1,31 @@
+{
+    "name": "R6 Laravel Template",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/var/www/html/",
+    "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "sqltools.connections": [
+            {
+                "name": "database",
+                "driver": "MySQL",
+                "server": "database",
+                "port": 3306,
+                "database": "laravel",
+                "username": "laravel",
+                "password": "laravel",
+                "previewLimit": 50,
+            }
+        ],
+    },
+    "extensions": [
+        "xdebug.php-debug",
+        "junstyle.php-cs-fixer",
+        "bmewburn.vscode-intelephense-client",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql",
+    ],
+    "forwardPorts": [80],
+    "remoteUser": "www-data",
+    "onCreateCommand": "composer install && cp --no-clobber .env.example .env && php artisan key:generate && php artisan storage:link && npm install && npm run build",
+}
