@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
+
+Route::redirect('lecturer', 'lecturer/schedule');
+Route::get('lecturer/schedule', function () {return view('lecturer/schedule');});
+
+Route::redirect('manager', 'manager/schedule');
+Route::get('manager/schedule', function () {return view('manager/schedule');});
+Route::get('manager/users', function () {return view('admin/users');});
+
+Route::get('admin', function () {return view('admin/index');});
+Route::get('admin/users', function () {return view('admin/users');});
+Route::get('admin/subjects', function () {return view('admin/subjects');});
