@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
+use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
 {
@@ -12,10 +13,19 @@ class ScheduleController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * determines if request if for lecturer or manager
+     * TODO update to use roles or permissions
      */
     public function index()
     {
-        //
+        $currentURL = url()->current();
+        $redirectURL = "";
+        if(Str::contains($currentURL, 'lecturer')){
+            $redirectURL = "lecturer/schedule";
+        }else{
+            $redirectURL = "manager/schedule";
+        }
+        return view($redirectURL);
     }
 
     /**
