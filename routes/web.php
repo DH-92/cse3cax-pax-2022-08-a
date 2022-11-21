@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +27,13 @@ Route::get('manager/users', function () {return view('admin/users');});
 Route::get('admin', function () {return view('admin/index');});
 Route::get('admin/users', function () {return view('admin/users');});
 Route::get('admin/subjects', function () {return view('admin/subjects');});
+
+
+Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom'); 
+Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
+
+
+Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change-password');
+Route::post('custom-password', [ChangePasswordController::class, 'customPassword'])->name('custom.password');
+
