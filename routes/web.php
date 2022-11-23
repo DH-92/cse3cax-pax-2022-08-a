@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ModalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,7 @@ Route::get('manager/users', function () {return view('admin/users');});
 Route::get('admin', function () {return view('admin/index');});
 Route::get('admin/users', function () {return view('admin/users');});
 Route::get('admin/subjects', function () {return view('admin/subjects');});
+
+Route::get('modal/assignLecturer/{id}', [ModalController::class, 'assignLecturer']);
+Route::get('modal/createInstance/{id}', [ModalController::class, 'createInstance']);
+Route::get('modal/import', [ModalController::class, 'import']);
