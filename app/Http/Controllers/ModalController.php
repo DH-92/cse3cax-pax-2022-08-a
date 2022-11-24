@@ -15,9 +15,19 @@ class ModalController extends BaseController
     public function getQualifiedLecturers(): array
     {
         return [
-            0 => "Acacia",
-            10 => "Beech",
-            20 => "Cypress"
+            0 => [
+                "lastName" => "Acacia",
+                "id" => 10,
+                "color" => "yellow"],
+            1 => [
+                "lastName" => "Beech",
+                "id" => 20,
+                "color" => "green"],
+            2 => [
+                "lastName" => "Cypress",
+                "id" => 30,
+                "color" => "red"
+            ]
         ];
     }
 

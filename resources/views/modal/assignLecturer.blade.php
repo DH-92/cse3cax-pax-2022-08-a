@@ -10,12 +10,12 @@
     <label for="lecturer">Lecturer: </label>
     <select id="lecturer" class="form-select" aria-label="Default select example">
         <option selected>Select a Lecturer</option>
-        @foreach($lecturers as $uid => $lecturer)
-            <option value="{{$uid}}">{{$lecturer}}</option>
+        @foreach($lecturers as $lecturer)
+            <option value="{{$lecturer['id']}}">{{$lecturer['lastName']}}</option>
         @endforeach
     </select>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn btn-primary">Assign</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </div>
