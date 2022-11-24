@@ -10,11 +10,4 @@ class Subject extends Model
 {
     use HasFactory;
     use HasTimestamps;
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'subjectId';
 }
