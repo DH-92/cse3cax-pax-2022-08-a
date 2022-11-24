@@ -8,18 +8,6 @@ html, body
     color: #154B81;
 }
 
-.btn-didasko-blue
-{
-    width: 100%;
-    background: #004a80;
-    color: white;
-    border: none;
-    border-radius: 100px;
-    padding: 13px;
-    font-size: 17px;
-    margin: 20px 0;
-}
-
 .bg-didasko
 {
     background-color: #154B81;
@@ -45,9 +33,9 @@ html, body
   #card-title {
     padding-bottom: 23px;
     padding-top: 13px;
-   
+
   }
-   
+
   #card-changePassword {
     background: #ffffff;
     border-radius: 8px;
@@ -56,16 +44,16 @@ html, body
     margin: 2rem auto 8.1rem auto;
     width: 40%;
     float: left;
-    
+
   }
   #card-changePasswordContent {
     padding: 12px 44px;
-   
+
   }
   #card-changePasswordTitle {
     padding-bottom: 15px;
     padding-top: 13px;
-   
+
   }
   .form {
     align-items: left;
@@ -79,4 +67,3 @@ html, body
     outline: none;
     padding-top: 14px;
   }
- 
