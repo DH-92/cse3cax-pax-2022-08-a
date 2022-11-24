@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         ]
 		[
 		'year' => '2021',
-		'month' => 'Febuary',
+		'month' => 'February',
         ]
 		[
 		'year' => '2021',
@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
         ]
 		[
 		'year' => '2022',
-		'month' => 'Febuary',
+		'month' => 'February',
         ]
 		[
 		'year' => '2022',
