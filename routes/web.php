@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SubjectInstanceController;
 use App\Http\Controllers\SubjectController;
  
 /*
@@ -19,10 +19,10 @@ use App\Http\Controllers\SubjectController;
 Route::get('/', function () {return view('welcome');});
 
 Route::redirect('lecturer', 'lecturer/schedule');
-Route::get('lecturer/schedule', [ScheduleController::class, 'index']);
+Route::get('lecturer/schedule', [SubjectInstanceController::class, 'index']);
 
 Route::redirect('manager', 'manager/schedule');
-Route::get('manager/schedule', [ScheduleController::class, 'index']);
+Route::get('manager/schedule', [SubjectInstanceController::class, 'index']);
 Route::get('manager/users', [UserController::class, 'index']);
 
 Route::get('admin', function () {return view('admin/index');});

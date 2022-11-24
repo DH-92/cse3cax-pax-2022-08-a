@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Schedule;
-use App\Http\Requests\StoreScheduleRequest;
-use App\Http\Requests\UpdateScheduleRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class ScheduleController extends Controller
+class SubjectInstanceController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * determines if request if for lecturer or manager
+     ** determines if request if for lecturer or manager
      * TODO update to use roles or permissions
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -41,10 +38,10 @@ class ScheduleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreScheduleRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreScheduleRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -52,10 +49,10 @@ class ScheduleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Schedule  $schedule
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Schedule $schedule)
+    public function show($id)
     {
         //
     }
@@ -63,10 +60,10 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Schedule  $schedule
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Schedule $schedule)
+    public function edit($id)
     {
         //
     }
@@ -74,11 +71,11 @@ class ScheduleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateScheduleRequest  $request
-     * @param  \App\Models\Schedule  $schedule
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateScheduleRequest $request, Schedule $schedule)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -86,10 +83,10 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Schedule  $schedule
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schedule $schedule)
+    public function destroy($id)
     {
         //
     }
