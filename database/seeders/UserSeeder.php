@@ -18,89 +18,82 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::table('users')->insert([
-			'firstname' => 'Acacia',
-			'password' => Hash::make('password'),
-            'email' => Str::random(10)'@gmail.com',
+			'firstName' => 'Acacia',
 			'maxLoad' => '1.0',
+            'email' => Str::random(10)'@gmail.com',
+			'password' => Hash::make('password'),
         ]
 		[
-			'firstname' => 'Beech',
-			'password' => Hash::make('password'),
-            'email' => Str::random(10).'@gmail.com',
+			'firstName' => 'Beech',
 			'maxLoad' => '1.0',
+            'email' => Str::random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Cypress',
-			'password' => Hash::make('password'),
-            'email' => Str::random(10).'@gmail.com',
+			'firstName' => 'Cypress',
 			'maxLoad' => '1.0',
+            'email' => Str::random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Douglas',
-			'password' => Hash::make('password'),
-            'email' => Str::random(10).'@gmail.com',
+			'firstName' => 'Douglas',
 			'maxLoad' => '0.8',
-		]
-		[
-			'firstname' => 'Eucalypt',
-			'password' => Hash::make('password'),
             'email' => Str::random(10).'@gmail.com',
+			'password' => Hash::make('password'),
+		]
+		[
+			'firstName' => 'Eucalypt',
 			'maxLoad' => '0.4',
+            'email' => Str::random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Flame',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Flame',
 			'maxLoad' => '1.0',
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Guava',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Guava',
 			'maxLoad' => '0.6',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Hickory',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Hickory',
 			'maxLoad' => '0.8',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Ironbark',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Ironbark',
 			'maxLoad' => '1.0',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Jacaranda',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Jacaranda',
 			'maxLoad' => '0.4',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Karri',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Karri',
 			'maxLoad' => '1.0',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Laurel',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Laurel',
 			'maxLoad' => '1.0',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		[
-			'firstname' => 'Mapel',
-			'password' => Hash::make('password'),
-            'email' => random(10).'@gmail.com',
+			'firstName' => 'Mapel',
 			'maxLoad' => '1.0',
-			
+            'email' => random(10).'@gmail.com',
+			'password' => Hash::make('password'),
 		]
 		);
     }
