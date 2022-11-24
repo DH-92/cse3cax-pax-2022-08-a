@@ -32,4 +32,5 @@
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
             crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/7fd83a0b84.js" crossorigin="anonymous"></script>
-        <div class="row flex-nowrap">
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
