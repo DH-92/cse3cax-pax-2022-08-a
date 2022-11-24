@@ -42,7 +42,7 @@
                     <i class="fa-solid fa-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                     <li class="w-100">
-                        <a href="change-password" class="nav-link px-0 link-light"> <i class="fa-solid fa-key"></i> <span class="d-none d-sm-inline">Change Password</span></a>
+                        <a href="/change-password" class="nav-link px-0 link-light"> <i class="fa-solid fa-key"></i> <span class="d-none d-sm-inline">Change Password</span></a>
                     </li>
                 </ul>
             </li>
