@@ -17,11 +17,11 @@ return new class extends Migration
     {
         Schema::create('user_qualification', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Subject::class,'subjectId')->constrained();
-            $table->foreignIdFor(User::class,'userId')->constrained();
+            $table->foreignIdFor(Subject::class,'subject_id')->constrained();
+            $table->foreignIdFor(User::class,'user_id')->constrained();
             $table->timestamps();
 
-            $table->unique(['subjectId','userId']);
+            $table->unique(['subject_id','user_id']);
         });
     }
 
