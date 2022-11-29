@@ -18,143 +18,143 @@ class TermSeeder extends Seeder
     {
         DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'January',
+		'month' => '1',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'February',
+		'month' => '2',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'March',
+		'month' => '3',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'April',
+		'month' => '4',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'May',
+		'month' => '5',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'June',
+		'month' => '6',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'July',
+		'month' => '7',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'August',
+		'month' => '8',
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'September',
+		'month' => '9',
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'October',
-		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-		DB::table('terms')->insert([
-		'year' => '2021',
-		'month' => 'November',
+		'month' => '10',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'December',
+		'month' => '11',
+		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+		DB::table('terms')->insert([
+		'year' => '2021',
+		'month' => '12',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'January',
+		'month' => '1',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'February',
+		'month' => '2',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'March',
+		'month' => '3',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'April',
+		'month' => '4',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'May',
+		'month' => '5',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'June',
+		'month' => '6',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'July',
+		'month' => '7',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'August',
+		'month' => '8',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'September',
+		'month' => '9',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'October',
+		'month' => '10',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'November',
+		'month' => '11',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => 'December',
+		'month' => '12',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
