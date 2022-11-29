@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Acacia',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Beech',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Cypress',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Douglas',
 			'maxLoad' => '0.8',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Eucalypt',
 			'maxLoad' => '0.4',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Flame',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -75,7 +75,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Guava',
 			'maxLoad' => '0.6',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Hickory',
 			'maxLoad' => '0.8',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -93,7 +93,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Ironbark',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -102,7 +102,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Jacaranda',
 			'maxLoad' => '0.4',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -111,7 +111,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Karri',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -120,7 +120,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Laurel',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -129,7 +129,7 @@ class UserSeeder extends Seeder
 			'firstName' => 'Mapel',
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
-			'userType' => 'User',
+			'userType' => '3',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
