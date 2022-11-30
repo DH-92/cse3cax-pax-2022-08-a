@@ -19,15 +19,15 @@
     <form action="#" method="post">
         <div class="w-50 mb-3">
             <label for="code" class="form-label">Subject Code</label>
-            <input type="text" class="form-control" id="code" value="{{ $data['code'] }}" placeholder="e.g: CSE1ITX" />
+            <input type="text" class="form-control" id="code" value="{{ $data['code'] ?? "" }}" placeholder="e.g: CSE1ITX" required/>
         </div>
         <div class="w-50 mb-3">
             <label for="name" class="form-label">Subject Name</label>
-            <input type="text" class="form-control" id="name" value="{{ $data['name'] }}" />
+            <input type="text" class="form-control" id="name" value="{{ $data['name'] ?? "" }}" placeholder="e.g: Information Technology Fundamentals" required />
         </div>
         <div class="w-50 mb-3">
             <label for="description" class="form-label">Subject Description</label>
-            <textarea class="form-control" rows="5" id="description">{{ $data['description'] }}</textarea>
+            <textarea class="form-control" rows="5" id="description" placeholder="Please enter a short description of the subject">{{ $data['description'] ?? "" }}</textarea>
         </div>
         <div class="w-50 px-2">
             @if($isEdit)
