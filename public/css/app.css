@@ -13,6 +13,11 @@ html, body
     background-color: #154B81;
 }
 
+.bg-disabled
+{
+    background-color: #b8b8b8;
+}
+
 .btn-primary
 {
     background-color: #154B81;

@@ -49,7 +49,7 @@
         </ul>
     </div>
 </div>
-<div class="col-auto col-md-9 col-xl-10 col-sm-9 px-0">
+<div class="col-auto col-md-9 col-xl-10 col-sm-9 px-3">
     <div class="container-fluid">
         <div class="row">
             <div class="col-4 ">
