@@ -29,3 +29,7 @@ Route::get('manager/users/add', function () {return view('admin.user-edit');});
 Route::get('admin', function () {return view('admin/index');});
 Route::get('admin/users', function () {return view('admin/users');});
 Route::get('admin/subjects', function () {return view('admin/subjects');});
+
+Route::redirect('admin/users/edit', '/admin/users');//TODO: display modal/warning about missing $code
+Route::get('admin/users/edit/{code}', function () {return view('admin/user-edit');});
+Route::get('admin/users/add', function () {return view('admin.user-edit');});
