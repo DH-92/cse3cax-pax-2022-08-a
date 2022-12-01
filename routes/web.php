@@ -27,6 +27,9 @@ Route::get('manager/users', function () {return view('admin/users');});
 Route::get('admin', function () {return view('admin/index');});
 Route::get('admin/users', function () {return view('admin/users');});
 Route::get('admin/subjects', function () {return view('admin/subjects');});
+Route::redirect('admin/subjects/edit', '/admin/subjects');//TODO: display modal/warning about missing $code
+Route::get('admin/subjects/edit/{code}', function () {return view('admin/subject-edit');});
+Route::get('admin/subjects/add', function () {return view('admin/subject-edit');});
 
 
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
