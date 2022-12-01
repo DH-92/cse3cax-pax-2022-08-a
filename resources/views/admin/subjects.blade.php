@@ -33,7 +33,10 @@
                     <tr>
                         <td>{{$subject->code}}</td>
                         <td>{{$subject->name}}</td>
-                        <td><a href="/admin/subjects/edit/{{$subject->code}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td>
+                            <a href="/admin/subjects/edit/{{$subject->code}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/admin/subjects/delete/{{$subject->code}}"><i class="fa-solid fa-trash"></i></a>
+                        </td>
                     </tr> 
                     @endforeach
                 </tbody>
