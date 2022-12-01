@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin/users');
+        $users = User::all();
+        return view('admin/users',['users'=>$users]);
     }
 
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -34,7 +36,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate?
+        User::create($request->all());
+
+        return redirect()->route('admin/users')
+        ->with('success','User created successfully.');
     }
 
     /**
@@ -44,8 +50,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $model = User::findOrFail($id);
+        return view('user.show', ['model'=>$model]);
     }
 
     /**
@@ -56,7 +63,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = User::findOrFail($id);
+        return view('user.edit', ['model'=>$model]);
     }
 
     /**
@@ -68,7 +76,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = User::findOrFail($id);
+        $model->update($request->all());
+
+        return redirect()->route('admin/users')
+        ->with('success','User edited successfully.');
     }
 
     /**
@@ -79,6 +91,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = User::findOrFail($id);
+        $model->delete();
+
+        return redirect()->route('admin/users')
+        ->with('success','User deleted successfully.');
+
     }
 }

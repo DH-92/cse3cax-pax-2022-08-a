@@ -7,6 +7,8 @@ use App\Http\Controllers\SubjectController;
  use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use Doctrine\DBAL\Schema\Index;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +30,16 @@ Route::get('manager/schedule', [SubjectInstanceController::class, 'index']);
 Route::get('manager/users', [UserController::class, 'index']);
 
 Route::get('admin', function () {return view('admin/index');});
-Route::get('admin/users', function () {return view('admin/users');});
-Route::get('admin/subjects', function () {return view('admin/subjects');});
+Route::get('admin/users', [UserController::class, 'index']);
+Route::get('admin/subjects', [SubjectController::class, 'index']);
 Route::redirect('admin/subjects/edit', '/admin/subjects');//TODO: display modal/warning about missing $code
-Route::get('admin/subjects/edit/{code}', function () {return view('admin/subject-edit');});
+// Route::get('admin/subjects/edit/{code}', function () {return view('admin/subject-edit');});
+Route::get('admin/subjects/edit/{code}', [SubjectController::class, 'edit']);
+Route::post('admin/subjects/edit/{code}', [SubjectController::class, 'update']);
 Route::get('admin/subjects/add', function () {return view('admin/subject-edit');});
+Route::post('admin/subjects/add', [SubjectController::class, 'store']);
+Route::get('admin/subjects/delete/{code}', [SubjectController::class, 'destroy']);
+
 
 
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
