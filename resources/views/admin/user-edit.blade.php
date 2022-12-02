@@ -25,19 +25,19 @@
 
 {{--Actual content starts here--}}
 <div class="container-fluid">
-    <form action="#" method="post">
+    <form action="{{$user->id ?? 'add'}}" method="post"> @csrf
         <div class="row w-75 mt-3 mb-3 align-items-center">
             <div class="col-2">
                 <label for="fname" class="form-label">First Name</label>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" id="fname" value="{{ $data['firstName'] ?? "" }}" placeholder="" />
+                <input type="text" name="firstName" class="form-control" id="fname" value="{{ $user->firstName ?? "" }}" placeholder="" />
             </div>
             <div class="col-2">
                 <label for="lname" class="form-label">Surname</label>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" id="lname" value="{{ $data['lastName'] ?? "" }}" placeholder="" />
+                <input type="text" name="lastName" class="form-control" id="lname" value="{{ $user->lastName ?? "" }}" placeholder="" />
             </div>
         </div>
         <div class="row w-75 mb-3 align-items-center">
@@ -45,13 +45,13 @@
                 <label for="phone" class="form-label">Phone</label>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" id="phone" value="{{ $data['phone'] ?? "" }}" placeholder="" />
+                <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone ?? "" }}" placeholder="" />
             </div>
             <div class="col-2">
                 <label for="email" class="form-label">Email</label>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" id="email" value="{{ $data['email'] ?? "" }}" placeholder="" />
+                <input type="text" name="email" class="form-control" id="email" value="{{ $user->email ?? "" }}" placeholder="" />
             </div>
         </div>
         <div class="row w-75 mb-3 align-items-center">
@@ -59,13 +59,13 @@
                 <label for="employmentType" class="form-label">Employment Type</label>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" id="employmentType" value="{{ $data['phone'] ?? "" }}" placeholder="" />
+                <input type="text" name="employmentType" class="form-control" id="employmentType" value="{{ $user->employmentType ?? "" }}" placeholder="" />
             </div>
             <div class="col-2">
                 <label for="userType" class="form-label">User Type</label>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" id="userType" value="{{ $data['email'] ?? "" }}" placeholder="" />
+                <input type="text" name="userType" class="form-control" id="userType" value="{{ $user->userType ?? "" }}" placeholder="" />
             </div>
         </div>
         <div class="row w-75 mb-3 align-items-center">
@@ -84,7 +84,7 @@
                 <label for="color" class="form-label">Schedule Colour</label>
             </div>
             <div class="col-4">
-                <input type="color" class="form-control form-control-color" id="color" value="{{ $data['color'] ?? "#ffffff" }}" title="Assign the colour to be used in the schedule for this user" />
+                <input type="color" name="color" class="form-control form-control-color" id="color" value="{{ $user->color ?? "#ffffff" }}" title="Assign the colour to be used in the schedule for this user" />
             </div>
         </div>
         <div class="row w-75 mb-3 align-items-center">
@@ -92,16 +92,16 @@
                 <label for="load" class="form-label">Subject Load</label>
             </div>
             <div class="col-10">
-                <input type="range" class="w-75" id="load" min="10" max="100" value="{{ $data['load'] ?? "80" }}" step="10" oninput="setLoadValue(this.value)" />
+                <input type="range" name="maxLoad" class="w-75" id="load" min="10" max="100" value="{{ $user->maxLoad ?? "80" }}" step="10" oninput="setLoadValue(this.value)" />
                 <span id="lblLoad"></span>%
             </div>
         </div>
         <div class="w-75 px-2">
             @if($isEdit)
-                <a href="#" class="btn btn-danger" role="button">Delete {{ $data['code'] ?? "" }}</a>
+                <a href="/admin/users/delete/{{$user->id}}" class="btn btn-danger" role="button">Delete</a>
             @endif
             <button type="submit" class="btn btn-primary float-end mx-2">{{ ($isEdit) ? "Save" : "Add" }}</button>
-            <a href="/admin/subjects/" class="btn btn-secondary float-end" role="button">Cancel</a>
+            <a href="/admin/users/" class="btn btn-secondary float-end" role="button">Cancel</a>
         </div>
     </form>
 </div>

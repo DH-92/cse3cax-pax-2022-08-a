@@ -41,8 +41,11 @@ Route::get('admin', function () {return view('admin/index');});
 Route::get('admin/users', [UserController::class, 'index']);
 Route::get('admin/subjects', [SubjectController::class, 'index']);
 Route::redirect('admin/users/edit', '/admin/users');//TODO: display modal/warning about missing $code
-Route::get('admin/users/edit/{code}', function () {return view('admin/user-edit');});
-Route::get('admin/users/add', function () {return view('admin.user-edit');});
+Route::get('admin/users/edit/{id}', [UserController::class, 'edit']);
+Route::post('admin/users/edit/{id}', [UserController::class, 'update']);
+Route::get('admin/users/add', [UserController::class, 'create']);
+Route::post('admin/users/add', [UserController::class, 'store']);
+Route::get('admin/users/delete/{id}', [UserController::class, 'destroy']);
 Route::redirect('admin/subjects/edit', '/admin/subjects');//TODO: display modal/warning about missing $code
 Route::get('admin/subjects/edit/{code}', [SubjectController::class, 'edit']);
 Route::post('admin/subjects/edit/{code}', [SubjectController::class, 'update']);
