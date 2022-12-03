@@ -163,8 +163,8 @@
             $term = $year . "_" . strtoupper($months[$i]);
             if(in_array($term, $terms)){
                 $user = $subject['instances'][$term]['user'];
-                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-2 pb-2 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
-                <a href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
+                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
+                <a class="text-primary" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
                         ' . ($user['lastName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
                     </a>
                 </div>';
@@ -172,24 +172,23 @@
         }
         $schedule[$key] = $rows;
     }
-
 @endphp
 <div class="col-1 offset-7 text-center">
 <button id="import" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
     Import
 </button>
 </div>
-<div class="container-fluid">
+<div class="container-fluid border border-dark">
     <div class="row">
-        <div class="col-2 bg-didasko text-center">
-            <h6 class="text-light font-weight-bold">Subject</h6>
+        <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
+            <h5 class="text-light font-weight-bold">Subject</h5>
         </div>
         <div class="col-10 px-0">
             <div class="container">
                 <div class="row">
                     @foreach($months as $month)
-                        <div class="col bg-didasko text-center">
-                            <h6 class="text-light font-weight-bold">{{ $month }}</h6>
+                        <div class="col bg-didasko text-center border border-dark pt-2 pb-1">
+                            <h5 class="text-light font-weight-bold">{{ $month }}</h5>
                         </div>
                     @endforeach
                 </div>
@@ -198,24 +197,24 @@
     </div>
     @foreach ($subjects as $code => $subject)
         <div class="row">
-            <div class="col-2 px-0">
+            <div class="col-2 px-0 border border-dark">
                 <div class="container">
                     <div class="row">
                         <div class="col-9  pt-2 pb-2">
-                            <a href="#" class="h5">
+                            <a href="#" class="h5 text-primary">
                                 {{$code}}
                             </a>
                         </div>
                         <div class="col-3">
                             <div class="container">
                                 <div class="col text-center pt-2 pb-2" id="{{$code}}-single">
-                                    <a href="#" onclick="expand('{{$code}}')">
+                                    <a href="#" class="text-primary" onclick="expand('{{$code}}')">
                                         <i class="fa-solid fa-plus"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="col text-center collapse pt-2 pb-2" id="{{$code}}-multiple">
-                                <a href="#" onclick="collapse('{{$code}}')">
+                                <a href="#" class="text-primary" onclick="collapse('{{$code}}')">
                                     <i class="fa-solid fa-minus"></i>
                                 </a>
                             </div>
@@ -238,9 +237,9 @@
                             if(array_key_exists($i, $schedule[$code][0])){
                                 echo(sprintf($schedule[$code][0][$i], "1"));
                             } else {
-                                echo('<div class="col-1 text-center border border-dark pt-2 pb-2 ">
-                                        <a href="#" onclick="createInstance(\'' . $code . '_' . $term . '\')" data-subject-instance="' . $term . '" data-bs-toggle="modal" data-bs-target="#modal">
-                                            +
+                                echo('<div class="col-1 text-center border border-dark pt-3 pb-3">
+                                        <a href="#" class="text-primary" onclick="createInstance(\'' . $code . '_' . $term . '\')" data-subject-instance="' . $term . '" data-bs-toggle="modal" data-bs-target="#modal">
+                                            <i class="fa-solid fa-plus"></i>
                                         </a>
                                     </div>');
                             }
@@ -263,9 +262,9 @@
                                     } elseif (!array_key_exists($i, $creates)) {
                                         $previous = $i;
                                         $creates[$i] = true;
-                                        echo('<div class="col-1 text-center border border-dark pt-2 pb-2 ">
-                                                <a href="#" onclick="createInstance(\'' . $code . '_' . $term . '\')" data-subject-instance="' . $term . '" data-bs-toggle="modal" data-bs-target="#modal">
-                                                    +
+                                        echo('<div class="col-1 text-center border border-dark pt-3 pb-3">
+                                                <a class="text-primary" href="#" onclick="createInstance(\'' . $code . '_' . $term . '\')" data-subject-instance="' . $term . '" data-bs-toggle="modal" data-bs-target="#modal">
+                                                    <i class="fa-solid fa-plus"></i>
                                                 </a>
                                             </div>');
                                     } elseif(!array_key_exists($i+1, $creates)) {
