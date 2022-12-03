@@ -1,4 +1,4 @@
-<div class="col-auto col-md-3 col-xl-2 col-sm-3 px-sm-2 px-0 bg-didasko">
+<div class="col-auto col-md-3 col-xl-2 col-sm-3 px-0 bg-didasko">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none link-light">
             <span class="fs-5 d-none d-sm-inline align-items-center"><img class="mw-100" src="{{ URL::asset('images/didasko-logo.jpg') }}" alt="Didasko Logo" /></span>
@@ -49,5 +49,11 @@
         </ul>
     </div>
 </div>
-<div>
-    <h1>{{$title}}</h1>
+<div class="col-auto col-md-9 col-xl-10 col-sm-9 px-3 mt-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 ">
+                <h2>{{$title}}</h2>
+            </div>
+
+
