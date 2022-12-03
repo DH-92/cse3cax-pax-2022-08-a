@@ -234,7 +234,7 @@
                         //Single row view
                         for($i = 0; $i < count($months); $i++){
                             $term = $year . '_' . strtoupper($months[$i]);
-                            if(array_key_exists($i, $schedule[$code][0])){
+                            if(isset($schedule[$code][0]) && array_key_exists($i, $schedule[$code][0])){
                                 echo(sprintf($schedule[$code][0][$i], "1"));
                             } else {
                                 echo('<div class="col-1 text-center border border-dark pt-3 pb-3">
@@ -252,7 +252,7 @@
                             echo('<div class="row collapse" id="' . $code . '-multiple">');
                                 for($i = 0; $i < count($months); $i++){
                                     $term = $year . '_' . strtoupper($months[$i]);
-                                    if(array_key_exists($i, $schedule[$code][0])){
+                                    if(isset($schedule[$code][0]) && array_key_exists($i, $schedule[$code][0])){
                                         $length = (count($months)-$i > 3) ? 3 : count($months)-$i;
                                         echo(sprintf($schedule[$code][0][$i], $length));
                                         unset($schedule[$code][0][$i]);
