@@ -13,11 +13,15 @@ html, body
     background-color: #154B81;
 }
 
+.bg-disabled
+{
+    background-color: #b8b8b8;
+}
 
- body {
-    background:  #ffffff;
-    background-repeat: no-repeat;
-  }
+.btn-primary
+{
+    background-color: #154B81;
+}
 
   #card {
     background: #ffffff;
