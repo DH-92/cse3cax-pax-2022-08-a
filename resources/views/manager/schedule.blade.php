@@ -206,6 +206,7 @@
                             </a>
                         </div>
                         <div class="col-3">
+                            @if($subject['instances'] != [])
                             <div class="container">
                                 <div class="col text-center pt-2 pb-2" id="{{$code}}-single">
                                     <a href="#" class="text-primary" onclick="expand('{{$code}}')">
@@ -218,6 +219,7 @@
                                     <i class="fa-solid fa-minus"></i>
                                 </a>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row collapse" id="{{$code}}-multiple">
