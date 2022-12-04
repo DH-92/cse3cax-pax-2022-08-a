@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
 			'userType' => '3',
+			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
 			'userType' => '3',
+			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
 			'userType' => '3',
+			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '0.8',
 			'employmentType' => 'Lecturer',
 			'userType' => '3',
+			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -58,6 +62,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '0.4',
 			'employmentType' => 'Lecturer',
 			'userType' => '3',
+			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -67,6 +72,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Lecturer',
 			'userType' => '3',
+			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
