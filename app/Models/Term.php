@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Term extends Model
 {
     use HasFactory;
+
+    public function subject()
+    {
+        return $this->hasMany(SubjectInstance::class);
+    }
 }
