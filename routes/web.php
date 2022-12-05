@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use Doctrine\DBAL\Schema\Index;
+use App\Http\Controllers\ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,17 @@ use Doctrine\DBAL\Schema\Index;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+Route::redirect('/', 'login');
 
 // lecturer routes
 Route::redirect('lecturer', 'lecturer/schedule');
-Route::get('lecturer/schedule', [SubjectInstanceController::class, 'index']);
+Route::get('lecturer/schedule', [ScheduleController::class, 'index']);
 
 // manager routes
 Route::redirect('manager', 'manager/schedule');
-Route::get('manager/schedule', [SubjectInstanceController::class, 'index']);
+Route::get('manager/schedule', [ScheduleController::class, 'index']);
 Route::get('manager/users', [UserController::class, 'index']);
-Route::get('manager/schedule', function () {return view('manager/schedule');});
+// Route::get('manager/schedule', function () {return view('manager/schedule');});
 Route::get('manager/users', function () {return view('admin/users');});
 Route::redirect('manager/users/edit', '/manager/users');//TODO: display modal/warning about missing $code
 Route::get('manager/users/edit/{code}', function () {return view('admin/user-edit');});
