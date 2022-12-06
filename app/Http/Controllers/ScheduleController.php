@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\SubjectInstance;
+use App\Models\Term;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Mockery\Matcher\Subset;
 
 class ScheduleController extends Controller
 {
@@ -34,5 +38,24 @@ class ScheduleController extends Controller
         }
         // dd($subjects);
         return view($redirectURL, ['subjects'=>$subjects]);
+    }
+
+    public function storeInstance()
+    {
+        $instance = $_POST['instance'];
+        $inst_arr = explode('_',$instance);
+        $subject = Subject::where('code', '=', $inst_arr[0])->first();
+        $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
+        if(isset($_POST['lecturer']) && $_POST['lecturer'] != "Select a Lecturer"){
+            $lecturer = User::where('firstName', 'LIKE',$_POST['lecturer'])->first();
+        }
+        $sInst = new SubjectInstance;
+        $sInst->subject_id = $subject->id;
+        $sInst->term_id = $term->id;
+        $sInst->version = 1;
+        $sInst->user_id = $lecturer->id??NULL;
+        $sInst->save();
+
+        return "success";
     }
 }

@@ -38,6 +38,8 @@ Route::redirect('manager/users/edit', '/manager/users');//TODO: display modal/wa
 Route::get('manager/users/edit/{code}', function () {return view('admin/user-edit');});
 Route::get('manager/users/add', function () {return view('admin.user-edit');});
 
+Route::post('instance/create', [ScheduleController::class, 'storeInstance']);
+
 // admin routes
 Route::get('admin', function () {return view('admin/index');});
 Route::get('admin/users', [UserController::class, 'index']);
@@ -54,7 +56,6 @@ Route::post('admin/subjects/edit/{code}', [SubjectController::class, 'update']);
 Route::get('admin/subjects/add', [SubjectController::class, 'create']);
 Route::post('admin/subjects/add', [SubjectController::class, 'store']);
 Route::get('admin/subjects/delete/{code}', [SubjectController::class, 'destroy']);
-
 
 // auth/PW routes
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
