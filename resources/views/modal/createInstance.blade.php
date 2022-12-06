@@ -30,7 +30,8 @@
                 data: { instance: instance, lecturer: lecturer }
                 })
                 .done(function( msg ) {
-                    alert( "Data Saved: " + msg );
+                    location.reload();
+                    // alert( "Data Saved: " + msg );
             });
         });
     });

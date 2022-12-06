@@ -26,7 +26,7 @@
                 $user = $subject['instances'][$term]['user'];
                 $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
                 <a class="text-primary" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
-                        ' . ($user['lastName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
+                        ' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
                     </a>
                 </div>';
             }

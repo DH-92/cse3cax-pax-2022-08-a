@@ -36,7 +36,6 @@ class ScheduleController extends Controller
             $subjects[$newSubKey] = $subjects[$k];
             unset($subjects[$k]);
         }
-        // dd($subjects);
         return view($redirectURL, ['subjects'=>$subjects]);
     }
 
@@ -47,7 +46,7 @@ class ScheduleController extends Controller
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
         $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
         if(isset($_POST['lecturer']) && $_POST['lecturer'] != "Select a Lecturer"){
-            $lecturer = User::where('firstName', 'LIKE',$_POST['lecturer'])->first();
+            $lecturer = User::find($_POST['lecturer']);
         }
         $sInst = new SubjectInstance;
         $sInst->subject_id = $subject->id;
