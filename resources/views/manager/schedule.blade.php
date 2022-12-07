@@ -149,10 +149,6 @@
         importCSV();
     });
 
-    document.getElementById('expand').addEventListener("click", function () {
-        assignLecturer($(this).data('subject-instance'));
-    });
-
     function collapse(subjectCode) {
         document.querySelectorAll("[id*=" + subjectCode + "-single]").forEach(function(div) {
             div.classList.remove("collapse");
