@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Subject::class,'subject_id')->constrained();
             $table->foreignIdFor(Term::class,'term_id')->constrained();
             $table->integer('version');
-            $table->foreignIdFor(User::class,'user_id')->constrained();
+            $table->foreignIdFor(User::class,'user_id')->nullable()->constrained();
             $table->boolean('published')->default(true);
             $table->boolean('active')->default(true);
             $table->timestamps();

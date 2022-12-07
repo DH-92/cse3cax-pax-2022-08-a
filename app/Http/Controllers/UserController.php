@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('admin/user-edit');
     }
 
     /**
@@ -36,10 +37,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //validate?
-        User::create($request->all());
-
-        return redirect()->route('admin/users')
+        $pw = Hash::make('password');
+        // User::create($request->all('firstName', 'lastName', 'phone', 'email', 'employmentType', 'userType', 'color', 'maxLoad'),);
+        User::create([
+            'firstName'=> $request->input('firstName'), 
+            'lastName'=> $request->input('lastName'), 
+            'phone'=> $request->input('phone'), 
+            'email'=> $request->input('email'), 
+            'employmentType'=> $request->input('employmentType'), 
+            'userType'=> $request->input('userType'), 
+            'color'=> $request->input('color'), 
+            'maxLoad'=> $request->input('maxLoad'),
+            'password' => $pw
+        ]);
+        return redirect('admin/users')
         ->with('success','User created successfully.');
     }
 
@@ -63,8 +74,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $model = User::findOrFail($id);
-        return view('user.edit', ['model'=>$model]);
+        $user = User::findOrFail($id);
+        return view('admin/user-edit', ['user'=>$user]);
     }
 
     /**
@@ -79,7 +90,7 @@ class UserController extends Controller
         $model = User::findOrFail($id);
         $model->update($request->all());
 
-        return redirect()->route('admin/users')
+        return redirect('admin/users')
         ->with('success','User edited successfully.');
     }
 
@@ -94,7 +105,7 @@ class UserController extends Controller
         $model = User::findOrFail($id);
         $model->delete();
 
-        return redirect()->route('admin/users')
+        return redirect('admin/users')
         ->with('success','User deleted successfully.');
 
     }
