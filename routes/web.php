@@ -38,7 +38,8 @@ Route::redirect('manager/users/edit', '/manager/users');//TODO: display modal/wa
 Route::get('manager/users/edit/{code}', function () {return view('admin/user-edit');});
 Route::get('manager/users/add', function () {return view('admin.user-edit');});
 
-Route::post('instance/create', [ScheduleController::class, 'storeInstance']);
+Route::post('instance/create', [ScheduleController::class, 'storeInstance']); 
+Route::post('instance/assignLecturer', [ScheduleController::class, 'assignLecturer']);
 
 // admin routes
 Route::get('admin', function () {return view('admin/index');});

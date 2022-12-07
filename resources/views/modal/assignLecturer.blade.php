@@ -6,7 +6,7 @@
     <p>Select a lecturer to assign to this Subject Instance. Please note that only lecturers qualified to teach this subject will be displayed. Alternatively, you can delete this Subject Instance by clicking the "Delete Instance" button.</p>
 
     <label for="instance">Subject Instance: </label>
-    <input id="instance" class="form-control" type="text" placeholder="{{ $id }}" aria-label="Disabled input example" disabled>
+    <input id="instance" class="form-control" type="text" value="{{ $id }}" aria-label="Disabled input example" disabled>
     <label for="lecturer">Lecturer: </label>
     <select id="lecturer" class="form-select" aria-label="Default select example">
         <option selected>Select a Lecturer</option>
@@ -16,6 +16,24 @@
     </select>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Assign</button>
+    <button type="button" id="submitLecturer" class="btn btn-primary">Assign</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#submitLecturer").click(function(){
+            var instance = $('#instance').val();
+            var lecturer = $('#lecturer').val();
+            $.ajax({
+                method: "POST",
+                url: "/instance/assignLecturer",
+                data: { instance: instance, lecturer: lecturer }
+                })
+                .done(function( msg ) {
+                    location.reload();
+                    // alert( "Data Saved: " + msg );
+            });
+        });
+    });
+</script>

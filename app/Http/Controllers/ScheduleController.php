@@ -57,4 +57,25 @@ class ScheduleController extends Controller
 
         return "success";
     }
+
+    public function assignLecturer()
+    {
+        $instance = $_POST['instance'];
+        $inst_arr = explode('_',$instance);
+        $subject = Subject::where('code', '=', $inst_arr[0])->first();
+
+        $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
+
+        $model = SubjectInstance::where('subject_id', $subject->id)
+                                ->where('term_id', $term->id)->first();
+                                
+        if(isset($_POST['lecturer']) && $_POST['lecturer'] != "Select a Lecturer"){
+            $lecturer = User::find($_POST['lecturer']);
+        }
+        
+        $model->user_id = $lecturer->id;
+        $model->save();
+
+        return "success";
+    }
 }
