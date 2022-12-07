@@ -18,143 +18,143 @@ class TermSeeder extends Seeder
     {
         DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '1',
+		'month' => 'JAN',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '2',
+		'month' => 'Feb',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '3',
+		'month' => 'Mar',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '4',
+		'month' => 'Apr',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '5',
+		'month' => 'May',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '6',
+		'month' => 'Jun',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '7',
+		'month' => 'Jul',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '8',
+		'month' => 'AUG',
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '9',
+		'month' => 'SEP',
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '10',
-		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-		DB::table('terms')->insert([
-		'year' => '2021',
-		'month' => '11',
+		'month' => 'OCT',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => '12',
+		'month' => 'NOV',
+		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+		DB::table('terms')->insert([
+		'year' => '2021',
+		'month' => 'DEC',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '1',
+		'month' => 'JAN',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '2',
+		'month' => 'FEB',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '3',
+		'month' => 'MAR',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '4',
+		'month' => 'APR',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '5',
+		'month' => 'MAY',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '6',
+		'month' => 'JUN',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '7',
+		'month' => 'JUL',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '8',
+		'month' => 'AUG',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '9',
+		'month' => 'SEP',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '10',
+		'month' => 'OCT',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '11',
+		'month' => 'NOV',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2022',
-		'month' => '12',
+		'month' => 'DEC',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }

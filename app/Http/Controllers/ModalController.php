@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,15 +18,15 @@ class ModalController extends BaseController
         return [
             0 => [
                 "lastName" => "Acacia",
-                "id" => 10,
+                "id" => 1,
                 "color" => "yellow"],
             1 => [
                 "lastName" => "Beech",
-                "id" => 20,
+                "id" => 2,
                 "color" => "green"],
             2 => [
                 "lastName" => "Cypress",
-                "id" => 30,
+                "id" => 3,
                 "color" => "red"
             ]
         ];

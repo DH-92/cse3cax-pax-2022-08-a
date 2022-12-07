@@ -21,4 +21,9 @@ class Subject extends Model
 
     use HasFactory;
     use HasTimestamps;
+
+    public function instances()
+    {
+        return $this->hasMany(SubjectInstance::class);
+    }
 }
