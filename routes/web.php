@@ -33,12 +33,12 @@ Route::redirect('manager', 'manager/schedule');
 Route::get('manager/schedule', [ScheduleController::class, 'index']);
 Route::get('manager/users', [UserController::class, 'index']);
 // Route::get('manager/schedule', function () {return view('manager/schedule');});
-Route::redirect('manager/users', 'admin/users');
+Route::get('manager/users', [UserController::class, 'index']);
 Route::redirect('manager/users/edit', '/manager/users');//TODO: display modal/warning about missing $code
 Route::get('manager/users/edit/{code}', function () {return view('admin/user-edit');});
 Route::get('manager/users/add', function () {return view('admin.user-edit');});
 
-Route::post('instance/create', [ScheduleController::class, 'storeInstance']); 
+Route::post('instance/create', [ScheduleController::class, 'storeInstance']);
 Route::post('instance/assignLecturer', [ScheduleController::class, 'assignLecturer']);
 
 // admin routes
