@@ -75,3 +75,9 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 Route::get('modal/assignLecturer/{id}', [ModalController::class, 'assignLecturer']);
 Route::get('modal/createInstance/{id}', [ModalController::class, 'createInstance']);
 Route::get('modal/import', [ModalController::class, 'import']);
+
+Route::controller(UserController::class)->group(function(){
+   // Route::get('users', 'index');
+    Route::get('users-export', 'export')->name('users.export');
+    Route::post('users-import', 'import')->name('users.import');
+});
