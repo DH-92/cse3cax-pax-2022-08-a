@@ -92,7 +92,7 @@
                 <label for="load" class="form-label">Subject Load</label>
             </div>
             <div class="col-10">
-                <input type="range" name="maxLoad" class="w-75" id="load" min="10" max="100" value="{{ $user->maxLoad ?? "80" }}" step="10" oninput="setLoadValue(this.value)" />
+                <input type="range" name="maxLoad" class="w-75" id="load" min="0.1" max="1" value="{{ $user->maxLoad }}" step="0.1" oninput="setLoadValue(this.value)" />
                 <span id="lblLoad"></span>%
             </div>
         </div>
@@ -110,7 +110,7 @@
     document.getElementById("lblLoad").onload(setLoadValue(loadVal));
 
     function setLoadValue(loadVal){
-        document.getElementById("lblLoad").innerHTML = loadVal;
+        document.getElementById("lblLoad").innerHTML = loadVal * 100;
     }
 </script>
 {{--close off any opening tags made in header/navigation--}}
