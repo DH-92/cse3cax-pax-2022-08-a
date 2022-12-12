@@ -35,8 +35,12 @@ Route::get('manager/users', [UserController::class, 'index']);
 // Route::get('manager/schedule', function () {return view('manager/schedule');});
 Route::get('manager/users', [UserController::class, 'index']);
 Route::redirect('manager/users/edit', '/manager/users');//TODO: display modal/warning about missing $code
-Route::get('manager/users/edit/{code}', function () {return view('admin/user-edit');});
-Route::get('manager/users/add', function () {return view('admin.user-edit');});
+Route::get('admin/users/edit/{id}', [UserController::class, 'edit']);
+Route::get('manager/users/edit/{id}', [UserController::class, 'edit']);
+Route::post('manager/users/edit/{id}', [UserController::class, 'update']);
+Route::get('manager/users/add', [UserController::class, 'create']);
+Route::post('manager/users/add', [UserController::class, 'store']);
+Route::get('manager/users/delete/{id}', [UserController::class, 'destroy']);
 
 Route::post('instance/create', [ScheduleController::class, 'storeInstance']);
 Route::post('instance/assignLecturer', [ScheduleController::class, 'assignLecturer']);
