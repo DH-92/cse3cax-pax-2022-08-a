@@ -40,13 +40,13 @@ class UserController extends Controller
         $pw = Hash::make('password');
         // User::create($request->all('firstName', 'lastName', 'phone', 'email', 'employmentType', 'userType', 'color', 'maxLoad'),);
         User::create([
-            'firstName'=> $request->input('firstName'), 
-            'lastName'=> $request->input('lastName'), 
-            'phone'=> $request->input('phone'), 
-            'email'=> $request->input('email'), 
-            'employmentType'=> $request->input('employmentType'), 
-            'userType'=> $request->input('userType'), 
-            'color'=> $request->input('color'), 
+            'firstName'=> $request->input('firstName'),
+            'lastName'=> $request->input('lastName'),
+            'phone'=> $request->input('phone'),
+            'email'=> $request->input('email'),
+            'employmentType'=> $request->input('employmentType'),
+            'userType'=> $request->input('userType'),
+            'color'=> $request->input('color'),
             'maxLoad'=> $request->input('maxLoad'),
             'password' => $pw
         ]);
@@ -61,7 +61,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $model = User::findOrFail($id);
         return view('user.show', ['model'=>$model]);
     }
@@ -90,7 +90,8 @@ class UserController extends Controller
         $model = User::findOrFail($id);
         $model->update($request->all());
 
-        return redirect('admin/users')
+        $destination = substr($request->path(), 0, strpos($request->path(),'/'));
+        return redirect($destination . '/users')
         ->with('success','User edited successfully.');
     }
 
@@ -100,13 +101,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $model = User::findOrFail($id);
         $model->delete();
 
-        return redirect('admin/users')
+        $destination = substr($request->path(), 0, strpos($request->path(),'/'));
+        return redirect($destination . '/users')
         ->with('success','User deleted successfully.');
 
+    }
+
+    public static function getUserTypes(): array
+    {
+        return [
+        //    0 => "Superuser",
+            1 => "Administrator",
+            2 => "Manager",
+            3 => "Lecturer"
+        ];
+    }
+
+    public static function getEmploymentTypes(): array
+    {
+        return ["Full-time", "Part-time", "Casual", "Intern", "Temp", "Other"];
     }
 }
