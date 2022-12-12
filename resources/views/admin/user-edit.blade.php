@@ -48,7 +48,7 @@
                 <select id="employmentType" name="employmentType" class="selectpicker w-100 border rounded border-primary">
                     <option value="Other">Other</option>
                     @foreach(UserController::getEmploymentTypes() as $type)
-                        <option value="{{ $type }}" @if ($user->employmentType == $type) selected @endif>{{ $type }}</option>
+                        <option value="{{ $type }}" @if (($user->employmentType ?? "Other") == $type) selected @endif>{{ $type }}</option>
                     @endforeach
                 </select>
             </div>
@@ -58,7 +58,7 @@
             <div class="col-4">
                 <select id="userType" name="userType" class="selectpicker w-100 border rounded border-primary">
                     @foreach(UserController::getUserTypes() as $id => $type)
-                        <option value="{{ $id }}" @if ($user->userType == $id) selected @endif>{{ $type }}</option>
+                        <option value="{{ $id }}" @if (($user->userType ?? 3) == $id) selected @endif>{{ $type }}</option>
                     @endforeach
                 </select>
             </div>
@@ -70,7 +70,7 @@
             <div class="col-4">
                 <select class="selectpicker w-100 border rounded border-primary" id="qualifications" name="qualifications" multiple>
                     @foreach(SubjectController::getSubjects() as $subject)
-                        <option value="{{ $subject->id }}">[{{ $subject->code }}] {{ $subject->name }}</option>
+                        <option value="{{ $subject->id }}" @if(isset($user) && $user->qualifications()->get()->contains('id', $subject->id)) selected @endif>[{{ $subject->code }}] {{ $subject->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -86,7 +86,7 @@
                 <label for="load" class="form-label">Subject Load</label>
             </div>
             <div class="col-10">
-                <input type="range" name="maxLoad" class="w-75" id="load" min="0.1" max="1" value="{{ $user->maxLoad }}" step="0.1" oninput="setLoadValue(this.value)" />
+                <input type="range" name="maxLoad" class="w-75" id="load" min="0.1" max="1" value="{{ $user->maxLoad ?? 0.8 }}" step="0.1" oninput="setLoadValue(this.value)" />
                 <span id="lblLoad"></span>%
             </div>
         </div>
