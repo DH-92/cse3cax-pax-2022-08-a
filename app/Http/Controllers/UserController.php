@@ -111,4 +111,19 @@ class UserController extends Controller
         ->with('success','User deleted successfully.');
 
     }
+
+    public static function getUserTypes(): array
+    {
+        return [
+        //    0 => "Superuser",
+            1 => "Administrator",
+            2 => "Manager",
+            3 => "Lecturer"
+        ];
+    }
+
+    public static function getEmploymentTypes(): array
+    {
+        return ["Full-time", "Part-time", "Casual", "Intern", "Temp", "Other"];
+    }
 }

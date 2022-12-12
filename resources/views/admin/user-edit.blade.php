@@ -1,4 +1,5 @@
 @php
+    use App\Http\Controllers\UserController;
     $isEdit = (request()->segment(count(request()->segments())) != "add");
 
     //TODO: this needs to be passed from controller/retrieved from model
@@ -59,13 +60,22 @@
                 <label for="employmentType" class="form-label">Employment Type</label>
             </div>
             <div class="col-4">
-                <input type="text" name="employmentType" class="form-control" id="employmentType" value="{{ $user->employmentType ?? "" }}" placeholder="" />
+                <select id="employmentType" name="employmentType" class="form-select">
+                    <option value="Other">Other</option>
+                    @foreach(UserController::getEmploymentTypes() as $type)
+                        <option value="{{ $type }}" @if ($user->employmentType == $type) selected @endif>{{ $type }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-2">
                 <label for="userType" class="form-label">User Type</label>
             </div>
             <div class="col-4">
-                <input type="text" name="userType" class="form-control" id="userType" value="{{ $user->userType ?? "" }}" placeholder="" />
+                <select id="userType" name="userType" class="form-select">
+                    @foreach(UserController::getUserTypes() as $id => $type)
+                        <option value="{{ $id }}" @if ($user->userType == $id) selected @endif>{{ $type }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="row w-75 mb-3 align-items-center">
@@ -98,10 +108,10 @@
         </div>
         <div class="w-75 px-2">
             @if($isEdit)
-                <a href="/admin/users/delete/{{$user->id}}" class="btn btn-danger" role="button">Delete</a>
+                <a href="../../users/delete/{{$user->id}}" class="btn btn-danger" role="button">Delete</a>
             @endif
             <button type="submit" class="btn btn-primary float-end mx-2">{{ ($isEdit) ? "Save" : "Add" }}</button>
-            <a href="/admin/users/" class="btn btn-secondary float-end" role="button">Cancel</a>
+            <a href="../../users" class="btn btn-secondary float-end" role="button">Cancel</a>
         </div>
     </form>
 </div>
