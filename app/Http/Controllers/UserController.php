@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -110,6 +112,20 @@ class UserController extends Controller
         return redirect($destination . '/users')
         ->with('success','User deleted successfully.');
 
+    }
+      /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import() 
+    {
+        try{
+            Excel::import(new UsersImport,request()->file('file'));
+            return redirect()->back()->with('success','Data Imported Successfully');
+        }
+        catch(\Exception $ex){
+            return back()->with('error', 'Error importing file');
+        }   
+        return back();
     }
 
     public static function getUserTypes(): array
