@@ -26,13 +26,14 @@ Route::redirect('/', 'login');
 
 // lecturer routes
 Route::redirect('lecturer', 'lecturer/schedule');
-Route::get('lecturer/schedule', [ScheduleController::class, 'index']);
+Route::get('lecturer/schedule', [ScheduleController::class, 'lecturerSchedule']);
 
 // manager routes
 Route::redirect('manager', 'manager/schedule');
 Route::get('manager/schedule', [ScheduleController::class, 'index']);
 Route::get('manager/users', [UserController::class, 'index']);
 // Route::get('manager/schedule', function () {return view('manager/schedule');});
+// Route::redirect('manager/users', '/admin/users');
 Route::get('manager/users', [UserController::class, 'index']);
 Route::redirect('manager/users/edit', '/manager/users');//TODO: display modal/warning about missing $code
 Route::get('admin/users/edit/{id}', [UserController::class, 'edit']);

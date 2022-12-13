@@ -9,16 +9,7 @@
 @php
     //TODO: remove hardcoded data - sample of data required for display
     //Sample of data returned when querying where("year", 2022).where("active", 1)
-    $subjects =[
-        "CSE1ITX" => [
-            "name"=> "Information Technology Fundamentals",
-            "instances" => ["2022_JAN", "2022_FEB", "2022_MAR", "2022_APR", "2022_MAY", "2022_JUN", "2022_JUL", "2022_AUG", "2022_SEP", "2022_OCT"],
-        ],
-        "CSE1SDX" => [
-            "name"=> "Software Development",
-            "instances" => ["2022_MAY", "2022_AUG", "2022_NOV"]
-        ]
-    ];
+    
 
     //Below to remain
     $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
