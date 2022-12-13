@@ -6,13 +6,22 @@
     <p>Click "Create" to create this subject instance. You can also assign a lecturer to this Subject Instance (optional). Please note that only lecturers qualified to teach this subject will be displayed.</p>
     <label for="instance">Subject Instance: </label>
     <input id="instance" class="form-control" type="text" value="{{ $id }}" aria-label="Disabled input example" disabled>
-    <label for="lecturer">Lecturer (optional): </label>
-    <select id="lecturer" class="form-select" aria-label="Default select example">
-        <option selected>Select a Lecturer</option>
-        @foreach($lecturers as $lecturer)
-        <option value="{{$lecturer['id']}}">{{$lecturer['lastName']}}</option>
-        @endforeach
-    </select>
+    @if($lecturers->isEmpty())
+        <div class="text-center text-danger pt-2 pb-2">
+            Could not find any qualified lecturers! Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
+        </div>
+    @else
+        <label for="lecturer">Lecturer: </label>
+        <select id="lecturer" class="form-select" aria-label="Default select example">
+            <option value="0" selected>Unassigned</option>
+            @foreach($lecturers as $lecturer)
+                <option value="{{ $lecturer->id }}">{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
+            @endforeach
+        </select>
+        <div class="float-end">
+            Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
+        </div>
+    @endif
 </div>
 <div class="modal-footer">
     <button type="button" id="submitInstance" class="btn btn-primary">Create</button>

@@ -44,7 +44,9 @@ class ModalController extends BaseController
             return $this->error("Invalid InstanceCode - " .  $id);
         }
 
-        return view('modal/createInstance', ['id' => $id, 'lecturers' => $this->getQualifiedLecturers($id)]);
+        $code = explode("_", $id);
+
+        return view('modal/createInstance', ['id' => $id, 'lecturers' => $this->getQualifiedLecturers($code[0])]);
     }
 
     public function isInstanceCodeValid($id): bool
