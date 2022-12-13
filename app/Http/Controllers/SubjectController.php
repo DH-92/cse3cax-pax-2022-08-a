@@ -80,10 +80,10 @@ class SubjectController extends Controller
             'code' => 'required',
             'name' => 'required',
         ]);
-        
+
         $subject = Subject::where('code',$code)->first();
         $subject->update($request->all('code', 'name', 'description'));
-    
+
         return redirect('admin/subjects')
         ->with('success','Subject updated successfully');
     }
@@ -98,8 +98,13 @@ class SubjectController extends Controller
     {
         $subject = Subject::where('code',$code)->first();
         $subject->delete();
-    
+
         return redirect('admin/subjects')
         ->with('success','Subject deleted successfully');
+    }
+
+    public static function getSubjects(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Subject::all();
     }
 }
