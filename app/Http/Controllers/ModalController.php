@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Subject;
+use App\Models\SubjectInstance;
+use App\Models\Term;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,24 +14,10 @@ class ModalController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    //TODO: remove hardcode
-    public function getQualifiedLecturers(): array
+    public function getQualifiedLecturers($code)
     {
-        return [
-            0 => [
-                "lastName" => "Acacia",
-                "id" => 1,
-                "color" => "yellow"],
-            1 => [
-                "lastName" => "Beech",
-                "id" => 2,
-                "color" => "green"],
-            2 => [
-                "lastName" => "Cypress",
-                "id" => 3,
-                "color" => "red"
-            ]
-        ];
+        $subject = Subject::where('code',$code)->first();
+        return $subject->lecturers()->get();
     }
 
     public function assignLecturer($id){
@@ -37,7 +25,18 @@ class ModalController extends BaseController
             return $this->error("Invalid Instance Code: " . $id);
         }
 
-        return view('modal/assignLecturer', ['id' => $id, 'lecturers' => $this->getQualifiedLecturers()]);
+        $code = explode("_", $id);
+        $result = ['id' => $id, 'lecturers' => $this->getQualifiedLecturers($code[0])];
+
+        $term = Term::where("month", $code[2])->where("year", $code[1])->first();
+        $subject = Subject::where("code", $code[0])->first();
+        $instance = SubjectInstance::where("term_id", $term->id)->where("subject_id", $subject->id)->first();
+
+        if($instance->user_id != null){
+            $result['assigned'] = $instance->user_id;
+        }
+
+        return view('modal/assignLecturer', $result);
     }
 
     public function createInstance($id){
@@ -45,7 +44,7 @@ class ModalController extends BaseController
             return $this->error("Invalid InstanceCode - " .  $id);
         }
 
-        return view('modal/createInstance', ['id' => $id, 'lecturers' => $this->getQualifiedLecturers()]);
+        return view('modal/createInstance', ['id' => $id, 'lecturers' => $this->getQualifiedLecturers($id)]);
     }
 
     public function isInstanceCodeValid($id): bool

@@ -26,4 +26,9 @@ class Subject extends Model
     {
         return $this->hasMany(SubjectInstance::class);
     }
+
+    public function lecturers()
+    {
+        return $this->BelongsToMany(User::class);
+    }
 }

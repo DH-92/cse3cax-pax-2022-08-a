@@ -17,13 +17,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstName', 
-        'lastName', 
-        'phone', 
-        'email', 
-        'employmentType', 
-        'userType', 
-        'color', 
+        'firstName',
+        'lastName',
+        'phone',
+        'email',
+        'employmentType',
+        'userType',
+        'color',
         'maxLoad',
         'password',
     ];
@@ -49,5 +49,10 @@ class User extends Authenticatable
     public function subjectInstance()
     {
         return $this->hasMany(SubjectInstance::class);
+    }
+
+    public function qualifications()
+    {
+        return $this->BelongsToMany(Subject::class);
     }
 }
