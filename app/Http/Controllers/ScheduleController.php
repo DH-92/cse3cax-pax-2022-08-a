@@ -75,15 +75,21 @@ class ScheduleController extends Controller
     public function lecturerSchedule(){
 
         $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', 1)->with('subject', 'term')->get()->toArray();
-        dd($subjectInstances);
-        // ('instances.user', function($q){
-        //     return $q->where('user_id', '=', 1);
-        // })->->get()->toArray();
-
-
         $arr = [];
-        
-        dd($arr);
-        return view('lecturer/schedule',[]);
+        foreach($subjectInstances as $instance){
+            $bool = array_key_exists($instance['subject']['code'], $arr);
+            if(!array_key_exists($instance['subject']['code'], $arr)){
+                $arr[$instance['subject']['code']] = [
+                    'name' => $instance['subject']['name'],
+                    'instances' => [
+                        $instance['term']['year'].'_'.$instance['term']['month']
+                    ]
+                ];
+            }else{
+                array_push($arr[$instance['subject']['code']]['instances'],$instance['term']['year'].'_'.$instance['term']['month']);
+            }
+        }
+        // dd($arr);
+        return view('lecturer/schedule',['subjects'=>$arr]);
     }
 }
