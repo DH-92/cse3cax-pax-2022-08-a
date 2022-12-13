@@ -14,15 +14,8 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        $currentURL = url()->current();
-        $redirectURL = "";
         $subjects = Subject::with('instances', 'instances.term', 'instances.user')->get()->toArray();
-        //check if manager or lecturer schedule requested
-        if(Str::contains($currentURL, 'lecturer')){
-            $redirectURL = "lecturer/schedule";
-        }else{
-            $redirectURL = "manager/schedule";            
-        }
+        
         foreach($subjects as $k => $subject){
             foreach($subject['instances'] as $oldkey => $instance){
                 //reassign array keys for each instance to YYYY_MMM e.g. '2022_JAN'
@@ -36,7 +29,7 @@ class ScheduleController extends Controller
             $subjects[$newSubKey] = $subjects[$k];
             unset($subjects[$k]);
         }
-        return view($redirectURL, ['subjects'=>$subjects]);
+        return view('manager/schedule', ['subjects'=>$subjects]);
     }
 
     public function storeInstance()
@@ -77,5 +70,20 @@ class ScheduleController extends Controller
         $model->save();
 
         return "success";
+    }
+
+    public function lecturerSchedule(){
+
+        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', 1)->with('subject', 'term')->get()->toArray();
+        dd($subjectInstances);
+        // ('instances.user', function($q){
+        //     return $q->where('user_id', '=', 1);
+        // })->->get()->toArray();
+
+
+        $arr = [];
+        
+        dd($arr);
+        return view('lecturer/schedule',[]);
     }
 }
