@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignIdFor(Subject::class,'subject_id')->constrained();
             $table->foreignIdFor(User::class,'user_id')->constrained();
             $table->timestamps();
-
             $table->unique(['subject_id','user_id']);
         });
     }
