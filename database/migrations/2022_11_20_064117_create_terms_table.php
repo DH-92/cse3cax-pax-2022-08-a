@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('terms', function (Blueprint $table) {
             $table->id('id');
             $table->integer('year');
-            $table->string('month', 3);
+            $table->varchar(10)('month', 3);
             $table->timestamps();
         });
     }
