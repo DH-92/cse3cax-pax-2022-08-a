@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -40,8 +41,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $pw = Hash::make('password');
-        // User::create($request->all('firstName', 'lastName', 'phone', 'email', 'employmentType', 'userType', 'color', 'maxLoad'),);
-        User::create([
+        $user = User::create([
             'firstName'=> $request->input('firstName'),
             'lastName'=> $request->input('lastName'),
             'phone'=> $request->input('phone'),
@@ -52,6 +52,16 @@ class UserController extends Controller
             'maxLoad'=> $request->input('maxLoad'),
             'password' => $pw
         ]);
+        $qualifications = $request->input('qualifications');
+        if(!empty($qualifications)){
+            $deleted = DB::table('subject_user')->where('user_id', $user->id)->delete();
+            foreach($qualifications as $qual){
+                DB::table('subject_user')->insert([
+                    'subject_id' => $qual,
+                    'user_id' =>  $user->id
+                ]);
+            }
+        }
         return redirect('admin/users')
         ->with('success','User created successfully.');
     }
@@ -89,9 +99,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $qualifications = $request->input('qualifications');
         $model = User::findOrFail($id);
         $model->update($request->all());
-
+        if(!empty($qualifications)){
+            $deleted = DB::table('subject_user')->where('user_id', $model->id)->delete();
+            foreach($qualifications as $qual){
+                DB::table('subject_user')->insert([
+                    'subject_id' => $qual,
+                    'user_id' =>  $model->id
+                ]);
+            }
+        }
         $destination = substr($request->path(), 0, strpos($request->path(),'/'));
         return redirect($destination . '/users')
         ->with('success','User edited successfully.');
