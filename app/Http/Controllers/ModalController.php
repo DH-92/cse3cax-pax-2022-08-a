@@ -31,7 +31,7 @@ class ModalController extends BaseController
         $term = Term::where("month", $code[2])->where("year", $code[1])->first();
         $subject = Subject::where("code", $code[0])->first();
         $instance = SubjectInstance::where("term_id", $term->id)->where("subject_id", $subject->id)->first();
-
+        $result['assigned'] = "";
         if($instance->user_id != null){
             $result['assigned'] = $instance->user_id;
         }

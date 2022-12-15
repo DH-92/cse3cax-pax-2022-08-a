@@ -68,7 +68,7 @@
                 <label for="qualifications" class="form-label">Subject Qualifications</label>
             </div>
             <div class="col-4">
-                <select class="selectpicker w-100 border rounded border-primary" id="qualifications" name="qualifications" multiple>
+                <select class="selectpicker w-100 border rounded border-primary" id="qualifications" name="qualifications[]" multiple>
                     @foreach(SubjectController::getSubjects() as $subject)
                         <option value="{{ $subject->id }}" @if(isset($user) && $user->qualifications()->get()->contains('id', $subject->id)) selected @endif>[{{ $subject->code }}] {{ $subject->name }}</option>
                     @endforeach
