@@ -24,37 +24,37 @@ class TermSeeder extends Seeder
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'Feb',
+		'month' => 'FEB',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'Mar',
+		'month' => 'MAR',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'Apr',
+		'month' => 'APR',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'May',
+		'month' => 'MAY',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'Jun',
+		'month' => 'JUN',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 		DB::table('terms')->insert([
 		'year' => '2021',
-		'month' => 'Jul',
+		'month' => 'JUL',
 		'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
