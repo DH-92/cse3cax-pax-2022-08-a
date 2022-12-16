@@ -12,7 +12,7 @@
         <form method="POST" action="{{ route('login.custom') }}">
             @csrf
             <div class="form-group mb-3">
-                <input type="email" placeholder="Email" id="email" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  required autofocus>
+                <input type="email" id="email" class="form-control" name="email" pattern="^[a-zA-Z0-9._%+-]+@ltu\.edu\.au" placeholder="Email - email@ltu.edu.au"  title="Please make sure that your email matches the following pattern 'name@ltu.edu.au'" required autofocus />
                 @if ($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif

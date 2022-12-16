@@ -7,6 +7,7 @@ use App\Models\SubjectInstance;
 use App\Models\Term;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Mockery\Matcher\Subset;
 
@@ -15,7 +16,7 @@ class ScheduleController extends Controller
     public function index()
     {
         $subjects = Subject::with('instances', 'instances.term', 'instances.user')->get()->toArray();
-        
+
         foreach($subjects as $k => $subject){
             foreach($subject['instances'] as $oldkey => $instance){
                 //reassign array keys for each instance to YYYY_MMM e.g. '2022_JAN'
@@ -61,11 +62,11 @@ class ScheduleController extends Controller
 
         $model = SubjectInstance::where('subject_id', $subject->id)
                                 ->where('term_id', $term->id)->first();
-                                
+
         if(isset($_POST['lecturer']) && $_POST['lecturer'] != "Select a Lecturer"){
             $lecturer = User::find($_POST['lecturer']);
         }
-        
+
         $model->user_id = $lecturer->id;
         $model->save();
 
@@ -73,8 +74,8 @@ class ScheduleController extends Controller
     }
 
     public function lecturerSchedule(){
-
-        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', 1)->with('subject', 'term')->get()->toArray();
+        $userId = Session::get('user')->id;
+        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->with('subject', 'term')->get()->toArray();
         $arr = [];
         foreach($subjectInstances as $instance){
             $bool = array_key_exists($instance['subject']['code'], $arr);
