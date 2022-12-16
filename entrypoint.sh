@@ -26,16 +26,18 @@ if [[ "${APP_ENV}" == "local" ]]; then
         fi
         php artisan key:generate
     fi
+    php artisan migrate:fresh --seed
 else
     [[ -n "${APP_KEY}" ]] || throw "-- APP_KEY is missing or invalid - exiting"
     php artisan optimize \
         && php artisan event:cache \
         && php artisan view:cache \
         || throw "-- failed to build caches - exiting"
+    php artisan migrate --force || throw "-- failed to handle DB migrations - exiting"
 fi
 
 php artisan storage:link
-php artisan migrate --force || throw "-- failed to handle DB migrations - exiting"
+
 
 if [[ $# -eq 0 ]]; then
     exec /usr/local/bin/caddy run --config "${CADDY_PATH}"
