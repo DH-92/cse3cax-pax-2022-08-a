@@ -7,6 +7,7 @@
 {{--Actual content starts here--}}
 
 <br>
+<div class="container">
 <div class="row">
 <div style="background-color:#08508a;"class="col-sm-8">
       <div class="well">
@@ -22,6 +23,7 @@
             <a href="admin/users">List Users</a>
           </div>
         </div>
+</div>
 </div>
 {{--close off any opening tags made in header/navigation--}}
 @include('footer')
