@@ -8,14 +8,14 @@
 {{--Actual content starts here--}}
 <br>
     
-<div style="border:2px solid white;", style="background-color:#0e6ea1;"class="col-sm-9">
+<div style="background-color:#0e6ea1;"class="col-sm-9">
       <div class="well">
         <h4 style="color:white;"> Subjects</h4>
         <a href="admin/subjects">List Subjects</a>
       </div>
 </br>     
 <br>
-        <div style="border:2px solid white;", style="background-color:#0e6ea1;"class="col-sm-9">
+        <div  style="background-color:#0e6ea1;"class="col-sm-9">
           <div class="well">
             <h4 style="color:white;"> Users</h4>
             <a href="admin/users">List Users</a>
