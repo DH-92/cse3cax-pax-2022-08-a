@@ -17,12 +17,6 @@
 </div>
 </div>
 <div class="row">
-<div style="background-color:white;"class="col-sm-4">
-      <div class="well">
-      </div>
-</div>
-</div>
-<div class="row">
         <div  style="background-color:#08508a;"class="col-sm-8">
           <div class="well">
             <h4 style="color:white;"> Users</h4>
