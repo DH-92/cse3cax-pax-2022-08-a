@@ -7,11 +7,6 @@
 
 {{--Actual content starts here--}}
 @php
-    //TODO: remove hardcoded data - sample of data required for display
-    //Sample of data returned when querying where("year", 2022).where("active", 1)
-    
-
-    //Below to remain
     $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     $year = 2022; //TODO: put into Route for pagination
     $schedule = [];
@@ -52,77 +47,80 @@
             </div>
         </div>
     </div>
-    @foreach ($subjects as $code => $subject)
-        <div class="row">
-            <div class="col-2 px-0 border border-dark">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-9 pt-2 pb-2">
-                            <a href="#" class="h5 text-primary">
-                                {{$code}}
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            @if($subject['instances'] != [])
-                                <div class="container">
-                                    <div class="col text-center pt-2 pb-2" id="{{$code}}-single">
-                                        <a href="#" class="text-primary" onclick="expand('{{$code}}')">
-                                            <i class="fa-solid fa-plus"></i>
+    @if($subjects != [])
+        @foreach ($subjects as $code => $subject)
+            <div class="row">
+                <div class="col-2 px-0 border border-dark">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-9 pt-2 pb-2">
+                                <a href="#" class="h5 text-primary">
+                                    {{$code}}
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                @if($subject['instances'] != [])
+                                    <div class="container">
+                                        <div class="col text-center pt-2 pb-2" id="{{$code}}-single">
+                                            <a href="#" class="text-primary" onclick="expand('{{$code}}')">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center collapse pt-2 pb-2" id="{{$code}}-multiple">
+                                        <a href="#" class="text-primary" onclick="collapse('{{$code}}')">
+                                            <i class="fa-solid fa-minus"></i>
                                         </a>
                                     </div>
-                                </div>
-                                <div class="col text-center collapse pt-2 pb-2" id="{{$code}}-multiple">
-                                    <a href="#" class="text-primary" onclick="collapse('{{$code}}')">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </a>
-                                </div>
-                            @endif
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="row collapse pt-0" id="{{$code}}-multiple">
-                        <div class="col">
-                            {{$subject['name']}}
+                        <div class="row collapse pt-0" id="{{$code}}-multiple">
+                            <div class="col">
+                                {{$subject['name']}}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-10 px-0">
-                <div class="container h-100">
-                    @php
-                        echo('<div class="row h-100" id="' . $code . '-single">');
-                        //Single row view
-                        for($i = 0; $i < count($months); $i++){
-                            $term = $year . '_' . strtoupper($months[$i]);
-                            if(isset($schedule[$code][0]) && array_key_exists($i, $schedule[$code][0])){
-                                echo(sprintf($schedule[$code][0][$i], "1"));
-                            } else {
-                                echo('<div class="col-1 text-center border border-dark pt-3 pb-3"></div>');
-                            }
-                        }
-                        echo('</div>');
-
-                        //multiple row view
-                        $creates = [];
-                        while($schedule[$code][0] != []){
-                            echo('<div class="row collapse" id="' . $code . '-multiple">');
-                                for($i = 0; $i < count($months); $i++){
-                                    $term = $year . '_' . strtoupper($months[$i]);
-                                    if(isset($schedule[$code][0]) && array_key_exists($i, $schedule[$code][0])){
-                                        $length = (count($months)-$i > 3) ? 3 : count($months)-$i;
-                                        echo(sprintf($schedule[$code][0][$i], $length));
-                                        unset($schedule[$code][0][$i]);
-                                        $i += 2;
-                                    } else {
-                                        echo('<div class="col-1 text-center border border-dark pt-3 pb-3"></div>');
-                                    }
+                <div class="col-10 px-0">
+                    <div class="container h-100">
+                        @php
+                            echo('<div class="row h-100" id="' . $code . '-single">');
+                            //Single row view
+                            for($i = 0; $i < count($months); $i++){
+                                $term = $year . '_' . strtoupper($months[$i]);
+                                if(isset($schedule[$code][0]) && array_key_exists($i, $schedule[$code][0])){
+                                    echo(sprintf($schedule[$code][0][$i], "1"));
+                                } else {
+                                    echo('<div class="col-1 text-center border border-dark pt-3 pb-3"></div>');
                                 }
+                            }
                             echo('</div>');
-                        }
-                    @endphp
+
+                            //multiple row view
+                            while($schedule[$code][0] != []){
+                                echo('<div class="row collapse" id="' . $code . '-multiple">');
+                                    for($i = 0; $i < count($months); $i++){
+                                        $term = $year . '_' . strtoupper($months[$i]);
+                                        if(isset($schedule[$code][0]) && array_key_exists($i, $schedule[$code][0])){
+                                            $length = (count($months)-$i > 3) ? 3 : count($months)-$i;
+                                            echo(sprintf($schedule[$code][0][$i], $length));
+                                            unset($schedule[$code][0][$i]);
+                                            $i += 2;
+                                        } else {
+                                            echo('<div class="col-1 text-center border border-dark pt-3 pb-3"></div>');
+                                        }
+                                    }
+                                echo('</div>');
+                            }
+                        @endphp
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    @else
+        <div class="mx-0 text-center h5 pb-2 pt-2">There are currently no Subject Instances assigned to you</div>
+    @endif
 </div>
 @include('modal.modal')
 <script type="text/javascript">
