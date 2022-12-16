@@ -86,3 +86,9 @@ Route::controller(UserController::class)->group(function(){
     Route::get('users-export', 'export')->name('users.export');
     Route::post('users-import', 'import')->name('users.import');
 });
+
+Route::controller(SubjectController::class)->group(function(){
+    // Route::get('users', 'index');
+     Route::get('subjects-export', 'export')->name('subjects.export');
+     Route::post('subjects-import', 'import')->name('subjects.import');
+ });
