@@ -7,7 +7,7 @@
 {{--Actual content starts here--}}
 
 <br>
-<div class="row">
+<div class="row" row-gap: 50px;>
 <div style="background-color:#08508a;"class="col-sm-9">
       <div class="well">
         <h4 style="color:white;"> Subjects</h4>
@@ -15,8 +15,7 @@
       </div>
 </div>
 </div>
-
-<div class="row">
+<div class="row" row-gap: 50px;>
         <div  style="background-color:#08508a;"class="col-sm-9">
           <div class="well">
             <h4 style="color:white;"> Users</h4>
