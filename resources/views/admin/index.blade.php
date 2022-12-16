@@ -6,7 +6,6 @@
 @include('navigation')
 {{--Actual content starts here--}}
 
-<br>
 <div class="container">
 <div class="row">
 <div style="background-color:#08508a;"class="col-sm-8">
