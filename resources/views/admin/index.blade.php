@@ -8,15 +8,15 @@
 {{--Actual content starts here--}}
 <br>
     
-    <div class="col-sm-9">
+<div style="background-color:#0B0B45;"class="col-sm-9">
       <div class="well">
-        <h4>Subjects</h4>
+        <h4> style="color:white;" Subjects</h4>
         <a href="admin/subjects">List Subjects</a>
       </div>
       <div class="row">
-        <div class="col-sm-9">
+        <div style="background-color:#0B0B45;"class="col-sm-9">
           <div class="well">
-            <h4>Users</h4>
+            <h4>style="color:white;" Users</h4>
             <a href="admin/users">List Users</a>
           </div>
         </div>
