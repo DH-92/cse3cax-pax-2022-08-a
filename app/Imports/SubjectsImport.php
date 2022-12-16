@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
   
-class SubjectsImport implements ToModel
+class SubjectsImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,9 +17,9 @@ class SubjectsImport implements ToModel
     public function model(array $row)
     {
         return new Subject([
-            'code'=>$row[0],
-            'name'=>$row[1],
-            'description'=>$row[2], 
+            'code'=>$row["code"],
+            'name'=>$row["name"],
+            'description'=>$row["description"], 
            
          
             
