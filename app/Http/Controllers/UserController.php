@@ -116,7 +116,7 @@ class UserController extends Controller
       /**
     * @return \Illuminate\Support\Collection
     */
-    public function import() 
+    public function import()
     {
         try{
             Excel::import(new UsersImport,request()->file('file'));
@@ -124,17 +124,16 @@ class UserController extends Controller
         }
         catch(\Exception $ex){
             return back()->with('error', 'Error importing file');
-        }   
+        }
         return back();
     }
 
     public static function getUserTypes(): array
     {
         return [
-        //    0 => "Superuser",
-            1 => "Administrator",
-            2 => "Manager",
-            3 => "Lecturer"
+            0 => "Lecturer",
+            1 => "Manager",
+            2 => "Administrator"
         ];
     }
 

@@ -2,7 +2,6 @@
     use App\Http\Controllers\UserController;
     use App\Http\Controllers\SubjectController;
     $isEdit = (request()->segment(count(request()->segments())) != "add");
-
     $title = ($isEdit) ? sprintf("Edit User: %s %s", $user->firstName, $user->lastName) : "Add User";
 @endphp
 
@@ -58,7 +57,7 @@
             <div class="col-4">
                 <select id="userType" name="userType" class="selectpicker w-100 border rounded border-primary">
                     @foreach(UserController::getUserTypes() as $id => $type)
-                        <option value="{{ $id }}" @if (($user->userType ?? 3) == $id) selected @endif>{{ $type }}</option>
+                        <option value="{{ $id }}" @if (($user->userType ?? 0) == $id) selected @endif>{{ $type }}</option>
                     @endforeach
                 </select>
             </div>
