@@ -47,6 +47,7 @@ Route::post('instance/create', [ScheduleController::class, 'storeInstance'])->mi
 Route::post('instance/assignLecturer', [ScheduleController::class, 'assignLecturer'])->middleware('auth:1');
 
 // admin routes
+Route::redirect('administrator', 'admin');
 Route::get('admin', function () {
     return view('admin/index');
 })->middleware('auth:2');
