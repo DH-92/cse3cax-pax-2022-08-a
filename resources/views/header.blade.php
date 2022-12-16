@@ -1,19 +1,6 @@
 @php
-
-
-    //TODO: Temporary hardcode - change when implementing login/authorization (CA2-41)
-    use Illuminate\Support\Facades\Request;$title = isset($title) ? " :: " . $title : "";
-    $permission = 0;
-    if (Request::is('lecturer/*')) {
-        $permission = 1;
-    } else if (Request::is('manager/*')) {
-        $permission = 2;
-    } else if (Request::is('admin/*') || Request::is('admin')) {
-        $permission = 3;
-    }
-    Session::put('permission', $permission);
+    $title = isset($title) ? " :: " . $title : "";
 @endphp
-
 <!doctype html>
 <html lang="en">
 
