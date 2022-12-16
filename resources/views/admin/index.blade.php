@@ -12,7 +12,7 @@
 <div style="background-color:#08508a;"class="col-sm-8">
       <div class="well">
         <h4 style="color:white;"> Subjects</h4>
-        <a "background-color:white;" href="admin/subjects">List Subjects</a>
+        <a style = "background-color:white;" href="admin/subjects">List Subjects</a>
       </div>
 </div>
 </div>
