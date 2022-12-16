@@ -137,9 +137,14 @@ class UserController extends Controller
     */
     public function import() 
     {
-       
+        try{
             Excel::import(new UsersImport,request()->file('file'));
             return redirect()->back()->with('success','Data Imported Successfully');
+        }
+        catch(\Exception $ex){
+            return back()->with('error', 'Error importing file');
+        }   
+        return back();
         
        
     }
