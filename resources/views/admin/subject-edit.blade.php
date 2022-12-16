@@ -1,13 +1,6 @@
 @php
     $isEdit = (request()->segment(count(request()->segments())) != "add");
-    //TODO: this needs to be passed from controller/retrieved from model
-    $data = (!$isEdit) ? null : [
-        'code' => $subject->code,
-        'name' => $subject->name,
-        'description' => $subject->description,
-    ];
-    //TODO: Move the above hardcode into the controller/routes
-    $title = ($isEdit) ? "Edit " . $data['code'] : "Add Subject";
+    $title = ($isEdit) ? "Edit " . $subject->code : "Add Subject";
 @endphp
 
 @include('header')
@@ -15,7 +8,7 @@
 
 {{--Actual content starts here--}}
 <div class="container-fluid">
-    <form action="{{$subject->code ?? 'add'}}" method="post"> 
+    <form action="{{$subject->code ?? 'add'}}" method="post">
         @csrf
         <div class="w-50 mb-3">
             <label for="code" class="form-label">Subject Code</label>
@@ -31,7 +24,7 @@
         </div>
         <div class="w-50 px-2">
             @if($isEdit)
-                <a href="/admin/subjects/delete/{{$subject->code}}" class="btn btn-danger" role="button">Delete {{ $data['code'] }}</a>
+                <a href="/admin/subjects/delete/{{$subject->code}}" class="btn btn-danger" role="button">Delete {{ $subject->code }}</a>
             @endif
             <button type="submit" class="btn btn-primary float-end mx-2">{{ ($isEdit) ? "Save" : "Add" }}</button>
                 <a href="/admin/subjects/" class="btn btn-secondary float-end" role="button">Cancel</a>
