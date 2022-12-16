@@ -146,5 +146,32 @@ class UserSeeder extends Seeder
             'email' => Str::random(10).'@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
+
+		DB::table('users')->insert([
+			'firstName' => 'Admin',
+			'maxLoad' => '1.0',
+			'employmentType' => 'full time',
+			'userType' => '2',
+            'email' => 'admin@ltu.edu.au',
+			'password' => Hash::make('password'),
+		]);
+
+		DB::table('users')->insert([
+			'firstName' => 'Manager',
+			'maxLoad' => '1.0',
+			'employmentType' => 'full time',
+			'userType' => '1',
+            'email' => 'manager@ltu.edu.au',
+			'password' => Hash::make('password'),
+		]);
+
+		DB::table('users')->insert([
+			'firstName' => 'Lecturer',
+			'maxLoad' => '1.0',
+			'employmentType' => 'full time',
+			'userType' => '3',
+            'email' => 'lecturer@ltu.edu.au',
+			'password' => Hash::make('password'),
+		]);
     }
 }
