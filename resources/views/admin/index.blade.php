@@ -7,16 +7,16 @@
 {{--Actual content starts here--}}
 
 <br>
-<div class="row" row-gap: 50px;>
-<div style="background-color:#08508a;"class="col-sm-9">
+<div class="row">
+<div style="background-color:#08508a;"class="col-sm-8">
       <div class="well">
         <h4 style="color:white;"> Subjects</h4>
         <a href="admin/subjects">List Subjects</a>
       </div>
 </div>
 </div>
-<div class="row" row-gap: 50px;>
-        <div  style="background-color:#08508a;"class="col-sm-9">
+<div class="row">
+        <div  style="background-color:#08508a;"class="col-sm-8">
           <div class="well">
             <h4 style="color:white;"> Users</h4>
             <a href="admin/users">List Users</a>
