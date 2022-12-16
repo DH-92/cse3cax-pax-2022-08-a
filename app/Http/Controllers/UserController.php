@@ -145,6 +145,8 @@ class UserController extends Controller
             return back()->with('error', 'Error importing file');
         }   
         return back();
+        
+       
     }
 
     public static function getUserTypes(): array

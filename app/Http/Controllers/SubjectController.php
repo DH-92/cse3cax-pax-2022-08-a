@@ -6,6 +6,8 @@ use App\Models\Subject;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use Illuminate\Http\Request;
+use App\Imports\SubjectsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubjectController extends Controller
 {
@@ -106,5 +108,20 @@ class SubjectController extends Controller
     public static function getSubjects(): \Illuminate\Database\Eloquent\Collection
     {
         return Subject::all();
+    }
+
+        /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import() 
+    {
+        try{
+            Excel::import(new SubjectsImport,request()->file('file'));
+            return redirect()->back()->with('success','Data Imported Successfully');
+        }
+        catch(\Exception $ex){
+            return back()->with('error', 'Error importing file');
+        }   
+        return back();
     }
 }
