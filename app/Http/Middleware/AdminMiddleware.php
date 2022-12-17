@@ -18,11 +18,10 @@ class AdminMiddleware
     {
       if (Auth::user()->usertype == '3'){
         return redirect('admin');
-      } elseif (Auth::user()->usertype == '2') {
-        return redirect('manager');
-    }
-        else {
-        return redirect('lecturer');
       }
+      if (Auth::user()->usertype == '2') {
+        return redirect('manager');
+      }
+      return redirect('lecturer');
     }
 }
