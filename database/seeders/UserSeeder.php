@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Acacia',
 			'maxLoad' => '1.0',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Beech',
 			'maxLoad' => '1.0',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Cypress',
 			'maxLoad' => '1.0',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Douglas',
 			'maxLoad' => '0.8',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -60,7 +60,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Eucalypt',
 			'maxLoad' => '0.4',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Casual',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Flame',
 			'maxLoad' => '1.0',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
 			DB::table('users')->insert([
 			'firstName' => 'Guava',
 			'maxLoad' => '0.6',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Part-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -100,7 +100,7 @@ class UserSeeder extends Seeder
 		DB::table('users')->insert([
 			'firstName' => 'Ironbark',
 			'maxLoad' => '1.0',
-			'employmentType' => 'Lecturer',
+			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
             'email' => Str::random(10).'@ltu.edu.au',
@@ -152,6 +152,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Full-time',
 			'userType' => '0',
+            'phone' => 'NULL',
             'email' => 'lecturer@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -161,6 +162,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Full-time',
 			'userType' => '1',
+            'phone' => 'NULL',
             'email' => 'manager@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
@@ -170,6 +172,7 @@ class UserSeeder extends Seeder
 			'maxLoad' => '1.0',
 			'employmentType' => 'Full-time',
 			'userType' => '2',
+            'phone' => 'NULL',
             'email' => 'admin@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
