@@ -51,10 +51,11 @@
         $("#submitInstance").click(function(){
             var instance = $('#instance').val();
             var lecturer = $('#lecturer').val();
+            var load = $('#load').val() / 100;
             $.ajax({
                 method: "POST",
                 url: "/instance/create",
-                data: { instance: instance, lecturer: lecturer }
+                data: { instance: instance, lecturer: lecturer, load: load }
                 })
                 .done(function( msg ) {
                     location.reload();

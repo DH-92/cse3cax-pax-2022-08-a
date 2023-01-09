@@ -47,6 +47,7 @@ class ScheduleController extends Controller
         $sInst->term_id = $term->id;
         $sInst->version = 1;
         $sInst->user_id = $lecturer->id??NULL;
+        $sInst->load = $_POST['load'] ?? 0;
         $sInst->save();
 
         return "success";
@@ -68,6 +69,7 @@ class ScheduleController extends Controller
         }
 
         $model->user_id = $lecturer->id;
+        $model->load = $_POST['load'];
         $model->save();
 
         return "success";
