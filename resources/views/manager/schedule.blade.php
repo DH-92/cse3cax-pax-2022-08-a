@@ -34,11 +34,6 @@
         $schedule[$key] = $rows;
     }
 @endphp
-<div class="col-1 offset-7 text-center">
-<button id="import" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
-    Import
-</button>
-</div>
 <div class="container-fluid border border-dark">
     <div class="row">
         <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
@@ -145,10 +140,6 @@
 </div>
 @include('modal.modal')
 <script type="text/javascript">
-    document.getElementById('import').addEventListener("click", function () {
-        importCSV();
-    });
-
     function collapse(subjectCode) {
         document.querySelectorAll("[id*=" + subjectCode + "-single]").forEach(function(div) {
             div.classList.remove("collapse");
@@ -177,13 +168,6 @@
     function createInstance(instanceCode) {
         $('#modal-content').empty();
         $.get("/modal/createInstance/" + instanceCode, function (data) {
-            $('#modal-content').append(data);
-        });
-    }
-
-    function importCSV() {
-        $('#modal-content').empty();
-        $.get("/modal/import", function (data) {
             $('#modal-content').append(data);
         });
     }
