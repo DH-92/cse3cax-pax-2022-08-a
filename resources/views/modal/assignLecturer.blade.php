@@ -14,7 +14,7 @@
         <label for="load">Additional Load: </label>
         <div class="row w-100">
             <div class="col-12">
-                <input type="range" name="load" class="w-75" id="load" min="0" max="100" value="{{ $user->load ?? 0 }}" step="5" oninput="setLoadValue(this.value)" />
+                <input type="range" name="load" class="w-75" id="load" min="0" max="100" value="{{ ($load*100) ?? 0 }}" step="5" oninput="setLoadValue(this.value)" />
                 <span id="lblLoad"></span>%
             </div>
             <div class="col-12 pt-2">
@@ -66,8 +66,7 @@
         });
     });
 
-    let loadVal = document.getElementById("load").value;
-    document.getElementById("lblLoad").addEventListener('load', setLoadValue(loadVal));
+    document.getElementById("lblLoad").addEventListener('change', setLoadValue(document.getElementById("load").value));
 
     function setLoadValue(loadVal){
         document.getElementById("lblLoad").innerHTML = loadVal;

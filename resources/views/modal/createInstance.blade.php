@@ -64,8 +64,7 @@
         });
     });
 
-    let loadVal = document.getElementById("load").value;
-    document.getElementById("lblLoad").addEventListener('load', setLoadValue(loadVal));
+    document.getElementById("lblLoad").addEventListener('load', setLoadValue(document.getElementById("load").value));
 
     function setLoadValue(loadVal){
         document.getElementById("lblLoad").innerHTML = loadVal;
