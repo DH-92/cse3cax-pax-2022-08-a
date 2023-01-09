@@ -68,7 +68,7 @@ class ScheduleController extends Controller
             $lecturer = User::find($_POST['lecturer']);
         }
 
-        $model->user_id = $lecturer->id;
+        $model->user_id = $lecturer->id ?? null;
         $model->load = $_POST['load'];
         $model->save();
 
