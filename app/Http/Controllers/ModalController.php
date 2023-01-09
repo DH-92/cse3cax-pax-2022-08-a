@@ -35,7 +35,11 @@ class ModalController extends BaseController
         if($instance->user_id != null){
             $result['assigned'] = $instance->user_id;
         }
-
+        $result['assignedSupport'] = "";
+        if($instance->support_id != null){
+            $result['assignedSupport'] = $instance->support_id;
+        }
+        $result['lecturer_load'] = $instance->lecturer_load ?? 100;
         return view('modal/assignLecturer', $result);
     }
 
