@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Full-Time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'acacia@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 

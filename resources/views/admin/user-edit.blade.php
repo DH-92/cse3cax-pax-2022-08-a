@@ -95,7 +95,7 @@
                 <a href="../../users/delete/{{$user->id}}" class="btn btn-danger" role="button">Delete</a>
             @endif
             <button type="submit" class="btn btn-primary float-end mx-2">{{ ($isEdit) ? "Save" : "Add" }}</button>
-            <a href="../../users" class="btn btn-secondary float-end" role="button">Cancel</a>
+            <a href="../" class="btn btn-secondary float-end" role="button">Cancel</a>
         </div>
     </form>
 </div>
