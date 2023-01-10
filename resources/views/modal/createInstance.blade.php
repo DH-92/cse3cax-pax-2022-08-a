@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-header pb-1 pt-1">
     <h5 class="modal-title" id="exampleModalLabel">Create Subject Instance</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
@@ -6,15 +6,26 @@
     <p>Click "Create" to create this subject instance. You can also assign a lecturer to this Subject Instance (optional). Please note that only lecturers qualified to teach this subject will be displayed.</p>
     <label for="instance">Subject Instance: </label>
     <input id="instance" class="form-control" type="text" value="{{ $id }}" aria-label="Disabled input example" disabled>
-        <!-- <div class="row w-75 mb-3 align-items-center">
-            <div class="col-3">
-                <label for="load" class="form-label">Instance Load Size:</label>
-            </div>
-            <div class="col-10">
-                <input type="range" name="maxLoad" class="w-75" id="load" min="0.1" max="1" value="{{ $user->maxLoad ?? 0.8 }}" step="0.1" oninput="setLoadValue(this.value)" />
+<div class="modal-body pt-0" id="modal-body">
+    <div>
+        <small>Click "Create" to create this subject instance. You can also assign a lecturer to this Subject Instance (optional). Please note that only lecturers qualified to teach this subject will be displayed.</small>
+    </div>
+    <div class="pt-2">
+        <label for="instance">Subject Instance: </label>
+        <input id="instance" class="form-control" type="text" value="{{ $id }}" aria-label="Disabled input example" disabled>
+    </div>
+    <div class="pt-2">
+        <label for="load">Additional Load: </label>
+        <div class="row w-100">
+            <div class="col-12">
+                <input type="range" name="load" class="w-75" id="load" min="0" max="100" value="{{ $user->load ?? 0 }}" step="5" oninput="setLoadValue(this.value)" />
                 <span id="lblLoad"></span>%
             </div>
-        </div> -->
+            <div class="col-12 pt-2">
+                <small>The "Additional Load" setting increases the amount of attention required from lecturers. For example, a large student count. An `additional load` of 100% equates to the load of two subjects.</small>
+            </div>
+        </div>
+    </div>
     @if($lecturers->isEmpty())
         <div class="text-center text-danger pt-2 pb-2">
             Could not find any qualified lecturers! Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
@@ -45,6 +56,15 @@
                 <option value="{{ $lecturer->id }}">{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
             @endforeach
         </select>
+        <div class="pt-2">
+            <label for="lecturer">Lecturer: </label>
+            <select id="lecturer" class="form-select" aria-label="Default select example">
+                <option value="0" selected>Unassigned</option>
+                @foreach($lecturers as $lecturer)
+                    <option value="{{ $lecturer->id }}">{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="float-end">
             Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
         </div>
@@ -97,12 +117,20 @@
         $("#submitInstance").click(function(){
             var instance = $('#instance').val();
             var lecturer = $('#lecturer').val();
+<<<<<<< HEAD
             var supportLecturer = $('#support-lecturer').val();
             var load = $('#lblLoad').text();
             $.ajax({
                 method: "POST",
                 url: "/instance/create",
                 data: { instance: instance, lecturer: lecturer, support: supportLecturer, load: load }
+=======
+            var load = $('#load').val() / 100;
+            $.ajax({
+                method: "POST",
+                url: "/instance/create",
+                data: { instance: instance, lecturer: lecturer, load: load }
+>>>>>>> d0166516bef10d70b0e6cf0540a8263f16ac27f2
                 })
                 .done(function( msg ) {
                     location.reload();
@@ -110,4 +138,10 @@
             });
         });
     });
+
+    document.getElementById("lblLoad").addEventListener('load', setLoadValue(document.getElementById("load").value));
+
+    function setLoadValue(loadVal){
+        document.getElementById("lblLoad").innerHTML = loadVal;
+    }
 </script>

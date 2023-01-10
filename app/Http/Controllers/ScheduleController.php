@@ -36,7 +36,7 @@ class ScheduleController extends Controller
     public function storeInstance()
     {
         $instance = $_POST['instance'];
-        $load = $_POST['load'];
+        $lecturer_load = $_POST['lecturer_load'];
         $inst_arr = explode('_',$instance);
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
         $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
@@ -53,7 +53,8 @@ class ScheduleController extends Controller
         $sInst->version = 1;
         $sInst->user_id = $lecturer->id??NULL;
         $sInst->support_id = $support->id??NULL;
-        $sInst->lecturer_load = $load;
+        $sInst->lecturer_load = $lecturer_load;
+        $sInst->load = $_POST['load'] ?? 0;
         $sInst->save();
 
         return "success";
@@ -81,6 +82,8 @@ class ScheduleController extends Controller
         $model->user_id = $lecturer->id;
         $model->lecturer_load = $load;
         $model->support_id = $support->id?? NULL;
+        $model->user_id = $lecturer->id ?? null;
+        $model->load = $_POST['load'];
         $model->save();
 
         return "success";
