@@ -19,9 +19,15 @@
             <input type="text" name="name" class="form-control" id="name" value="{{ $subject->name ?? "" }}" placeholder="e.g: Information Technology Fundamentals" required />
         </div>
         <div class="w-50 mb-3">
+                    <label for="color" class="form-label">Schedule Colour</label>
+                    <input type="color" name="color" class="form-control form-control-color border-primary" id="color" value="{{ $user->color ?? "#ffffff" }}" title="Assign the colour to be used in the lecturer schedule for this subject" />
+                </div>
+        <div class="w-50 mb-3">
             <label for="description" class="form-label">Subject Description</label>
             <textarea class="form-control" name="description" rows="5" id="description" placeholder="Please enter a short description of the subject">{{ $subject->description ?? "" }}</textarea>
         </div>
+            </div>
+            
         <div class="w-50 px-2">
             @if($isEdit)
                 <a href="/admin/subjects/delete/{{$subject->code}}" class="btn btn-danger" role="button">Delete {{ $subject->code }}</a>

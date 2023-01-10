@@ -40,7 +40,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        Subject::create($request->all('code', 'name', 'description'));
+        Subject::create($request->all('code', 'name', 'description','color'));
 
         return redirect('admin/subjects')
         ->with('success','Subject created successfully');
