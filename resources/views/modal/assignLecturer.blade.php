@@ -39,8 +39,8 @@
             <label for="load" class="form-label">Primary Lecturer Load Allocation:</label>
         </div>
         <div class="col-10">
-            <input type="range" name="lecturer_load" class="w-75" id="lecturer_load" min="5" max="100" value="{{ $lecturer_load ?? 100 }}" step="5" oninput="setLoadValue(this.value)" />
-            <span id="lblLoad">{{ $lecturer_load ?? 100 }}</span>%
+            <input type="range" name="lecturer_load" class="w-75" id="lecturer_load" min="5" max="100" value="{{ $lecturer_load ?? 100 }}" step="5" oninput="setLecturerLoadValue(this.value)" />
+            <span id="lblLecturerLoad">{{ $lecturer_load ?? 100 }}</span>%
         </div>
     </div>
     <br>
@@ -54,18 +54,6 @@
     <div class="float-end">
         Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
     </div>
-        <div class="pt-2">
-            <label for="lecturer">Lecturer: </label>
-            <select id="lecturer" class="form-select" aria-label="Default select example">
-                <option value="0">Unassigned</option>
-                @foreach($lecturers as $lecturer)
-                    <option value="{{ $lecturer->id }}" @if($assigned == $lecturer->id) selected @endif>{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="float-end">
-            Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
-        </div>
     @endif
 </div>
 <div class="modal-footer">
@@ -97,8 +85,8 @@
         support = $('#support-lecturer').val();
         if(support != 0){
             $('#lecturer_load').removeAttr('disabled');
-            let loadVal = document.getElementById("lecturer_load").value;
-            $("lblLoad").load(setLoadValue(loadVal));
+            // let loadVal = document.getElementById("lecturer_load").value;
+            // $("#lblLecturerLoad").load(setLecturerLoadValue(loadVal));
         }else{
             $('#lecturer_load').attr('disabled', true);
         }
@@ -106,8 +94,8 @@
 
     $('#support-lecturer').change(support);
 
-    function setLoadValue(loadVal){
-        document.getElementById("lblLoad").innerHTML = loadVal;
+    function setLecturerLoadValue(loadVal){
+        document.getElementById("lblLecturerLoad").innerHTML = loadVal;
     }
 
     $(document).ready(function(){
@@ -117,17 +105,17 @@
             var instance = $('#instance').val();
             var lecturer = $('#lecturer').val();
             var supportLecturer = $('#support-lecturer').val();
-            var lecturer_load = $('#lblLoad').text();
+            var lecturer_load = $('#lblLecturerLoad').text();
             var load = $('#load').val() / 100;
             $.ajax({
                 method: "POST",
                 url: "/instance/assignLecturer",
                 data: { instance: instance, lecturer: lecturer, support: supportLecturer, load: load, lecturer_load: lecturer_load }
-                .done(function( msg ) {
+                
+        }).done(function( msg ) {
                     location.reload();
                     // alert( "Data Saved: " + msg );
-            })
-        });
+            });
     });
 });
 

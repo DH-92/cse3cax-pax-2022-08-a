@@ -65,7 +65,7 @@ class ScheduleController extends Controller
         $instance = $_POST['instance'];
         $inst_arr = explode('_',$instance);
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
-        $load = $_POST['load'];
+        $lecturer_load = $_POST['lecturer_load'];
         $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
 
         $model = SubjectInstance::where('subject_id', $subject->id)
@@ -80,7 +80,7 @@ class ScheduleController extends Controller
         }
 
         $model->user_id = $lecturer->id;
-        $model->lecturer_load = $load;
+        $model->lecturer_load = $lecturer_load;
         $model->support_id = $support->id?? NULL;
         $model->user_id = $lecturer->id ?? null;
         $model->load = $_POST['load'];
