@@ -17,6 +17,7 @@ class Subject extends Model
         'code',
         'name',
         'description',
+        'color'
     ];
 
     use HasFactory;
