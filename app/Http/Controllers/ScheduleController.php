@@ -36,17 +36,24 @@ class ScheduleController extends Controller
     public function storeInstance()
     {
         $instance = $_POST['instance'];
+        $lecturer_load = $_POST['lecturer_load'];
         $inst_arr = explode('_',$instance);
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
         $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
         if(isset($_POST['lecturer']) && $_POST['lecturer'] != "Select a Lecturer"){
             $lecturer = User::find($_POST['lecturer']);
         }
+        if(isset($_POST['support']) && $_POST['support'] != 0){
+            $support = User::find($_POST['support']);
+        }
+
         $sInst = new SubjectInstance;
         $sInst->subject_id = $subject->id;
         $sInst->term_id = $term->id;
         $sInst->version = 1;
         $sInst->user_id = $lecturer->id??NULL;
+        $sInst->support_id = $support->id??NULL;
+        $sInst->lecturer_load = $lecturer_load;
         $sInst->load = $_POST['load'] ?? 0;
         $sInst->save();
 
@@ -58,7 +65,7 @@ class ScheduleController extends Controller
         $instance = $_POST['instance'];
         $inst_arr = explode('_',$instance);
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
-
+        $lecturer_load = $_POST['lecturer_load'];
         $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
 
         $model = SubjectInstance::where('subject_id', $subject->id)
@@ -68,6 +75,13 @@ class ScheduleController extends Controller
             $lecturer = User::find($_POST['lecturer']);
         }
 
+        if(isset($_POST['support']) && $_POST['support'] != 0){
+            $support = User::find($_POST['support']);
+        }
+
+        $model->user_id = $lecturer->id;
+        $model->lecturer_load = $lecturer_load;
+        $model->support_id = $support->id?? NULL;
         $model->user_id = $lecturer->id ?? null;
         $model->load = $_POST['load'];
         $model->save();

@@ -25,7 +25,7 @@
             if(in_array($term, $terms)){
                 $user = $subject['instances'][$term]['user'];
                 $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
-                <a class="text-primary" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
+                <a class="assigned" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
                         ' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
                     </a>
                 </div>';
@@ -34,6 +34,12 @@
         $schedule[$key] = $rows;
     }
 @endphp
+<div class="col-1 offset-7 text-center">
+<button id="import" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
+    Import
+</button>
+</div>
+<div class="manager-schedule container-fluid border border-dark">
 <div class="container-fluid border border-dark">
     <div class="row">
         <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
