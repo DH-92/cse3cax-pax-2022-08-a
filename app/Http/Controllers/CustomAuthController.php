@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Hash;
-use Session;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class CustomAuthController extends Controller
 {
@@ -27,17 +25,20 @@ class CustomAuthController extends Controller
             $user = Auth::user();
             Session::put('user', $user);
             $intended = UserController::getUserTypes()[$user->userType];
+
             return redirect()->intended(strtolower($intended))
-                ->withSuccess("Signed in");
+                ->withSuccess('Signed in');
         }
-        return redirect()->back()->with('message', 'Login details are not valid' );
+
+        return redirect()->back()->with('message', 'Login details are not valid');
     }
 
-    public function signOut() {
+    public function signOut()
+    {
         Session::flush();
         Auth::logout();
 
         return Redirect('login')
-            ->withSuccess("Signed out");
+            ->withSuccess('Signed out');
     }
 }

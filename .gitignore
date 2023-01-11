@@ -12,6 +12,7 @@
 !.env.example
 .lando.*yml
 .phpunit.result.cache
+.php-cs-fixer.cache
 docker-compose.*yml
 !docker-compose.yml
 Homestead.json

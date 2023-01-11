@@ -23,6 +23,7 @@ _ide_*
 .phpstorm.meta.php
 .phpunit.result.cache
 .styleci.yml
+.php-cs-fixer.cache
 **/.DS_Store
 auth.json
 docker-compose.*yml
