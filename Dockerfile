@@ -69,6 +69,17 @@ RUN composer install \
   --optimize-autoloader
 
 
+FROM composer-up AS lint
+RUN composer install \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --optimize-autoloader
+COPY . .
+ARG COMPOSER_ALLOW_SUPERUSER=1
+RUN composer lint -- fix --dry-run
+
+
 FROM node:16-alpine AS vite-build
 WORKDIR /var/www/html
 COPY package*.json ./
@@ -79,6 +90,7 @@ RUN npm run build
 
 
 FROM caddy-up AS final
+COPY --from=lint /lint-output.txt /lint-output.txt
 COPY --from=composer-up \
   /var/www/html/vendor vendor
 COPY --from=vite-build \
