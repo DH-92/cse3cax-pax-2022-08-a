@@ -73,7 +73,7 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 
 Route::get('modal/assignLecturer/{id}', [ModalController::class, 'assignLecturer'])->middleware('auth:1');
 Route::get('modal/createInstance/{id}', [ModalController::class, 'createInstance'])->middleware('auth:1');
-Route::get('modal/import', [ModalController::class, 'import'])->middleware('auth:null,1');  //Will allow manager AND admin
+Route::get('modal/publish/{id}', [ModalController::class, 'publish'])->middleware('auth:1');
 
 Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change-password')->middleware('auth');
 Route::post('custom-password', [ChangePasswordController::class, 'customPassword'])->name('custom.password')->middleware('auth');

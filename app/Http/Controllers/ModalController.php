@@ -57,8 +57,8 @@ class ModalController extends BaseController
         return true;
     }
 
-    public function import(){
-        return view('modal/import');
+    public function publish($id){
+        return view('modal/publish', ['id' => $id]);
     }
 
     public function error(String $message){

@@ -34,6 +34,11 @@
         $schedule[$key] = $rows;
     }
 @endphp
+<div class="col-2 offset-6 text-center">
+    <button id="publish" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
+        Publish Schedule
+    </button>
+</div>
 <div class="container-fluid border border-dark">
     <div class="row">
         <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
@@ -140,6 +145,10 @@
 </div>
 @include('modal.modal')
 <script type="text/javascript">
+    document.getElementById('publish').addEventListener("click", function () {
+        publish();
+    });
+
     function collapse(subjectCode) {
         document.querySelectorAll("[id*=" + subjectCode + "-single]").forEach(function(div) {
             div.classList.remove("collapse");
@@ -168,6 +177,22 @@
     function createInstance(instanceCode) {
         $('#modal-content').empty();
         $.get("/modal/createInstance/" + instanceCode, function (data) {
+            $('#modal-content').append(data);
+        });
+    }
+
+    function publish() {
+        let unassigned = false; //TODO: link to unassigned lecturer Jira issue
+        let overload = false; //TODO: link to overloaded lecturer warning jira issue
+        let validate = 0;
+
+        if(unassigned || overload){
+            validate += (unassigned) ? 1 : 0;
+            validate += (overload) ? 2 : 0;
+        }
+
+        $('#modal-content').empty();
+        $.get("/modal/publish/" + validate, function (data) {
             $('#modal-content').append(data);
         });
     }
