@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('subject_instance', function(Blueprint $table) {
+        Schema::table('subject_instance', function (Blueprint $table) {
             $table->float('load', 3)
                 ->after('user_id')
                 ->default(0);

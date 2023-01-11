@@ -1,15 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ModalController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\SubjectInstanceController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ForgotPasswordController;
-use Doctrine\DBAL\Schema\Index;
+use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\UserController;
+use Doctrine\DBAL\Schema\Index;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,16 +82,18 @@ Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPa
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
-Route::get('/unauthorized', function () {return view('auth.unauthorized');});
+Route::get('/unauthorized', function () {
+return view('auth.unauthorized');
+});
 
-Route::controller(UserController::class)->group(function(){
-   // Route::get('users', 'index');
+Route::controller(UserController::class)->group(function () {
+    // Route::get('users', 'index');
     Route::get('users-export', 'export')->name('users.export')->middleware('auth');
     Route::post('users-import', 'import')->name('users.import')->middleware('auth');
 });
 
-Route::controller(SubjectController::class)->group(function(){
+Route::controller(SubjectController::class)->group(function () {
     // Route::get('users', 'index');
-     Route::get('subjects-export', 'export')->name('subjects.export');
-     Route::post('subjects-import', 'import')->name('subjects.import');
- });
+    Route::get('subjects-export', 'export')->name('subjects.export');
+    Route::post('subjects-import', 'import')->name('subjects.import');
+});

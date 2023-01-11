@@ -18,15 +18,15 @@ return new class extends Migration
     {
         Schema::create('subject_instance', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Subject::class,'subject_id')->constrained();
-            $table->foreignIdFor(Term::class,'term_id')->constrained();
+            $table->foreignIdFor(Subject::class, 'subject_id')->constrained();
+            $table->foreignIdFor(Term::class, 'term_id')->constrained();
             $table->integer('version');
-            $table->foreignIdFor(User::class,'user_id')->nullable()->constrained();
+            $table->foreignIdFor(User::class, 'user_id')->nullable()->constrained();
             $table->boolean('published')->default(true);
             $table->boolean('active')->default(true);
             $table->timestamps();
 
-            $table->unique(['subject_id','term_id','version']);
+            $table->unique(['subject_id', 'term_id', 'version']);
         });
     }
 
