@@ -20,7 +20,7 @@
         </div>
         <div class="w-50 mb-3">
                     <label for="color" class="form-label">Schedule Colour</label>
-                    <input type="color" name="color" class="form-control form-control-color border-primary" id="color" value="{{ $user->color ?? "#ffffff" }}" title="Assign the colour to be used in the lecturer schedule for this subject" />
+                    <input type="color" name="color" class="form-control form-control-color border-primary" id="color" value="{{ $subject->color ?? "#ffffff" }}" title="Assign the colour to be used in the lecturer schedule for this subject" />
                 </div>
         <div class="w-50 mb-3">
             <label for="description" class="form-label">Subject Description</label>

@@ -84,7 +84,7 @@ class SubjectController extends Controller
         ]);
 
         $subject = Subject::where('code',$code)->first();
-        $subject->update($request->all('code', 'name', 'description'));
+        $subject->update($request->all('code', 'name', 'description','color'));
 
         return redirect('admin/subjects')
         ->with('success','Subject updated successfully');
