@@ -77,7 +77,7 @@ RUN composer install \
     --optimize-autoloader
 COPY . .
 ARG COMPOSER_ALLOW_SUPERUSER=1
-RUN composer lint -- fix --dry-run
+RUN composer lint -- fix --dry-run >> /lint-output.txt
 
 
 FROM node:16-alpine AS vite-build
