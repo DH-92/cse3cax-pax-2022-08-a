@@ -40,7 +40,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        Subject::create($request->all('code', 'name', 'description'));
+        Subject::create($request->all('code', 'name', 'description','color'));
 
         return redirect('admin/subjects')
         ->with('success','Subject created successfully');
@@ -84,7 +84,7 @@ class SubjectController extends Controller
         ]);
 
         $subject = Subject::where('code',$code)->first();
-        $subject->update($request->all('code', 'name', 'description'));
+        $subject->update($request->all('code', 'name', 'description','color'));
 
         return redirect('admin/subjects')
         ->with('success','Subject updated successfully');

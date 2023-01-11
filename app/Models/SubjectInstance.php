@@ -30,4 +30,9 @@ class SubjectInstance extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function support()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
