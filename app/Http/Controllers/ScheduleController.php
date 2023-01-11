@@ -96,11 +96,11 @@ class ScheduleController extends Controller
         foreach($subjectInstances as $instance){
             $bool = array_key_exists($instance['subject']['code'], $arr);
             if(!array_key_exists($instance['subject']['code'], $arr)){
-                $arr[$instance['subject']['code']] = [
+                $arr[$instance['subject']['code'] ] = [
                     'name' => $instance['subject']['name'],
+                    'color' => $instance['subject']['color'],
                     'instances' => [
-                        $instance['term']['year'].'_'.$instance['term']['month']
-                    ]
+                        $instance['term']['year'].'_'.$instance['term']['month']]
                 ];
             }else{
                 array_push($arr[$instance['subject']['code']]['instances'],$instance['term']['year'].'_'.$instance['term']['month']);

@@ -16,7 +16,8 @@ class Subject extends Model
     protected $fillable = [
         'code',
         'name',
-        'description',
+        'color',
+        'description'
     ];
 
     use HasFactory;
