@@ -47,6 +47,7 @@ class ScheduleController extends Controller
         $sInst->term_id = $term->id;
         $sInst->version = 1;
         $sInst->user_id = $lecturer->id??NULL;
+        $sInst->published = 0;
         $sInst->load = $_POST['load'] ?? 0;
         $sInst->save();
 
