@@ -83,7 +83,7 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::get('/unauthorized', function () {
-return view('auth.unauthorized');
+    return view('auth.unauthorized');
 });
 
 Route::controller(UserController::class)->group(function () {
