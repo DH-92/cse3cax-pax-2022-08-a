@@ -48,6 +48,8 @@ ENTRYPOINT ["entrypoint.sh"]
 
 
 FROM caddy-up as dev
+ARG CADDY_SRC=https://gist.githubusercontent.com/DH-92/bd84c1ac6768f6908d3233f1ae4bbeb1/raw/Caddyfile-local
+ADD --chown=www-data "${CADDY_SRC}" "${CADDY_PATH}"
 COPY --link --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV XDEBUG_MODE=
 ENV APP_ENV=local
