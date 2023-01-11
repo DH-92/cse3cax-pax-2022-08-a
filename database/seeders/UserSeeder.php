@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Full-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'beech@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 		
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Full-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'cypress@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Full-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'douglas@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Casual',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'eucalypt@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 		
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Full-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'flame@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 		
@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Part-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'guava@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -93,7 +93,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Other',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'hickory@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -103,7 +103,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Full-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'ironbark@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -113,7 +113,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Temp',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'jacaranda@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -123,7 +123,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Intern',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'karri@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -133,7 +133,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Casual',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'laurel@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
@@ -143,7 +143,7 @@ class UserSeeder extends Seeder
 			'employmentType' => 'Part-time',
 			'userType' => '0',
 			'phone' => '0412 345 678',
-            'email' => Str::random(10).'@ltu.edu.au',
+            'email' => 'laurel@ltu.edu.au',
 			'password' => Hash::make('password'),
 		]);
 
