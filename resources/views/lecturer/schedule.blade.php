@@ -21,7 +21,7 @@
                 //TODO: Subject information modal
                 //TODO: Subject color?? - will have to alter model
                 $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate">
-                <a class="text-primary" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
+                <a class="text-primary" href="#" onclick="" data-bs-toggle="modal" data-bs-target="#modal">
                         ' . $term . '
                     </a>
                 </div>';
