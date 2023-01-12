@@ -13,8 +13,8 @@
             </div>
             <div class="pt-2 col-6 pb-2">
                 <div class="pt-2 pb-2 form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" @if($published == 1) checked @endif />
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Published</label>
+                    <input class="form-check-input" type="checkbox" id="published" @if($published == 1) checked @endif />
+                    <label class="form-check-label" for="published">Published</label>
                 </div>
             </div>
         </div>
@@ -126,10 +126,11 @@
             var supportLecturer = $('#support-lecturer').val();
             var lecturer_load = $('#lblLecturerLoad').text();
             var load = $('#load').val() / 100;
+            var published = (document.getElementById('published').checked) ? 1 : 0;
             $.ajax({
                 method: "POST",
                 url: "/instance/assignLecturer",
-                data: { instance: instance, lecturer: lecturer, support: supportLecturer, load: load, lecturer_load: lecturer_load }
+                data: { instance: instance, lecturer: lecturer, support: supportLecturer, load: load, lecturer_load: lecturer_load, published: published }
 
         }).done(function( msg ) {
                     location.reload();

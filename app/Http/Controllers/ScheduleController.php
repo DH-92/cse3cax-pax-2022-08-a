@@ -85,6 +85,7 @@ class ScheduleController extends Controller
         $model->support_id = $support->id?? NULL;
         $model->user_id = $lecturer->id ?? null;
         $model->load = $_POST['load'];
+        $model->published = $_POST['published'];
         $model->save();
 
         return "success";
