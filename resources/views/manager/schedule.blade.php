@@ -23,10 +23,11 @@
             $style = null;
             $term = $year . "_" . strtoupper($months[$i]);
             if(in_array($term, $terms)){
+                $published = (($subject['instances'][$term]['published']) == 1) ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-regular fa-circle-check"></i>';
                 $user = $subject['instances'][$term]['user'];
-                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
+                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-1 pb-1 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
                 <a class="assigned" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
-                        ' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
+                    ' . $published . '<br />' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
                     </a>
                 </div>';
             }
