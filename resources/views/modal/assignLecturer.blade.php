@@ -13,7 +13,7 @@
             </div>
             <div class="pt-2 col-6 pb-2">
                 <div class="pt-2 pb-2 form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" @if($published == 1) checked @endif />
                     <label class="form-check-label" for="flexSwitchCheckDefault">Published</label>
                 </div>
             </div>
