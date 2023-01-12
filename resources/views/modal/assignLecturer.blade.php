@@ -1,24 +1,33 @@
 <div class="modal-header pb-1 pt-1">
-    <h5 class="modal-title" id="exampleModalLabel">Assign Lecturer</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Edit Subject Instance: {{ $id }}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<div class="modal-body pt-0" id="modal-body">
+<div class="modal-body pt-0 pb-2" id="modal-body">
     <div>
         <small>Select a lecturer to assign to this Subject Instance. Please note that only lecturers qualified to teach this subject will be displayed. Alternatively, you can delete this Subject Instance by clicking the "Delete Instance" button.</small>
     </div>
-    <div class="pt-2">
-        <label for="instance">Subject Instance: </label>
-        <input id="instance" class="form-control" type="text" value="{{ $id }}" aria-label="Disabled input example" disabled>
+    <div class="form-group border-top pt-1">
+        <div class="row">
+            <div class="pt-2 col-6">
+                <input id="instance" class="form-control w-100" type="text" value="{{ $id }}" aria-label="Disabled input example" disabled>
+            </div>
+            <div class="pt-2 col-6 pb-2">
+                <div class="pt-2 pb-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Published</label>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="pt-2">
-        <label for="load">Additional Load: </label>
+        <label for="load">Additional Subject Instance Load: </label>
         <div class="row w-100">
             <div class="col-12">
-                <input type="range" name="load" class="w-75" id="load" min="0" max="100" value="{{ ($load*100) ?? 0 }}" step="5" oninput="setLoadValue(this.value)" />
+                <input type="range" name="load" class="w-75" id="load" min="0" max="1000" value="{{ ($load*100) ?? 0 }}" step="10" oninput="setLoadValue(this.value)" />
                 <span id="lblLoad"></span>%
             </div>
-            <div class="col-12 pt-2">
-                <small>The "Additional Load" setting increases the amount of attention required from lecturers. For example, a large student count. An `additional load` of 100% equates to the load of two subjects.</small>
+            <div class="col-12 pt-2 pb-2">
+                <small>The "Additional Load" setting increases the amount of attention required from lecturers. For example, a large student count or when additional material is required to be created. An `additional load` of 100% equates to two subjects.</small>
             </div>
         </div>
     </div>
@@ -27,38 +36,48 @@
             Could not find any qualified lecturers! Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
         </div>
     @else
-    <label for="lecturer">Lecturer: </label>
-    <select id="lecturer" class="form-select" aria-label="Default select example">
-        <option value="0">Unassigned</option>
-        @foreach($lecturers as $lecturer)
-            <option value="{{ $lecturer->id }}" @if($assigned == $lecturer->id) selected @endif>{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
-        @endforeach
-    </select>
-    <div class="row w-75 mb-3 align-items-center">
-        <div class="col-6">
+        <div class="form-group border-top">
+            <div class="row">
+                <div class="pt-2 col-6">
+                    <label for="lecturer">Primary Lecturer: </label>
+                    <select id="lecturer" class="form-select" aria-label="Default select example">
+                        <option value="0">Unassigned</option>
+                        @foreach($lecturers as $lecturer)
+                            <option value="{{ $lecturer->id }}" @if($assigned == $lecturer->id) selected @endif>{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="pt-2 col-6">
+                    <label for="support-lecturer">Supporting Lecturer: </label>
+                    <select id="support-lecturer" class="form-select" aria-label="Default select example" disabled='true'>
+                        <option value="0">primary lecturer required for support lecturer allocation</option>
+                        @foreach($lecturers as $lecturer)
+                            <option value="{{ $lecturer->id }}" @if($assignedSupport == $lecturer->id) selected @endif >{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="pt-2">
             <label for="load" class="form-label">Primary Lecturer Load Allocation:</label>
+            <div class="row w-100">
+                <div class="col-12">
+                    <input type="range" name="lecturer_load" class="w-75" id="lecturer_load" min="5" max="100" value="{{ $lecturer_load ?? 100 }}" step="5" oninput="setLecturerLoadValue(this.value)" />
+                    <span id="lblLecturerLoad">{{ $lecturer_load ?? 100 }}</span>%
+                </div>
+                <div class="col-12 pt-1">
+                    <small>You can add a supporting lecturer for this subject instance. Additionally, set how much of the subject instance load will be assigned to the Primary Lecturer.</small>
+                </div>
+            </div>
         </div>
-        <div class="col-10">
-            <input type="range" name="lecturer_load" class="w-75" id="lecturer_load" min="5" max="100" value="{{ $lecturer_load ?? 100 }}" step="5" oninput="setLecturerLoadValue(this.value)" />
-            <span id="lblLecturerLoad">{{ $lecturer_load ?? 100 }}</span>%
+        <div class="float-end">
+            Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
         </div>
-    </div>
-    <br>
-    <label for="support-lecturer">Supporting Lecturer: </label>
-    <select id="support-lecturer" class="form-select" aria-label="Default select example" disabled='true'>
-        <option value="0">primary lecturer required for support lecturer allocation</option>
-        @foreach($lecturers as $lecturer)
-            <option value="{{ $lecturer->id }}" @if($assignedSupport == $lecturer->id) selected @endif >{{ $lecturer->firstName . ' ' . $lecturer->lastName }}</option>
-        @endforeach
-    </select>
-    <div class="float-end">
-        Click <a href="users" class="text-primary">here</a> to assign qualifications to lecturers.
-    </div>
     @endif
 </div>
 <div class="modal-footer">
     @if(!$lecturers->isEmpty())
-    <button type="button" id="submitLecturer" class="btn btn-primary">Assign</button>
+    <button type="button" id="submitLecturer" class="btn btn-primary">Save</button>
     @endif
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </div>
@@ -111,7 +130,7 @@
                 method: "POST",
                 url: "/instance/assignLecturer",
                 data: { instance: instance, lecturer: lecturer, support: supportLecturer, load: load, lecturer_load: lecturer_load }
-                
+
         }).done(function( msg ) {
                     location.reload();
                     // alert( "Data Saved: " + msg );
