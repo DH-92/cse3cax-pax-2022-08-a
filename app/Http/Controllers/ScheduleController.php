@@ -120,7 +120,7 @@ class ScheduleController extends Controller
 
     public function lecturerSchedule(){
         $userId = Session::get('user')->id;
-        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
+        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->orWhereRelation('user', 'support_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
         $arr = [];
         foreach($subjectInstances as $instance){
             if($instance['active'] == 1) {
