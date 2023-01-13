@@ -77,7 +77,7 @@
 </div>
 <div class="modal-footer">
     <div class="col float-start">
-        <a href="/instance/delete/{{$id}}" class="btn btn-danger" role="button">Delete Instance</a>
+        <button type="button" class="btn btn-danger" onclick="deleteInstance()">Delete Instance</button>
     </div>
     @if(!$lecturers->isEmpty())
     <button type="button" id="submitLecturer" class="btn btn-primary">Save</button>
@@ -118,6 +118,15 @@
 
     function setLecturerLoadValue(loadVal){
         document.getElementById("lblLecturerLoad").innerHTML = loadVal;
+    }
+
+    function deleteInstance(){
+        $.ajax({
+            method: "GET",
+            url: "/instance/delete/{{ $id }}"
+        }).done(function( msg ) {
+            location.reload();
+        });
     }
 
     $(document).ready(function(){

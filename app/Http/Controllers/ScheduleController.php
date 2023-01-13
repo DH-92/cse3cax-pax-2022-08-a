@@ -58,6 +58,7 @@ class ScheduleController extends Controller
         $sInst->support_id = $support->id??NULL;
         $sInst->lecturer_load = $lecturer_load;
         $sInst->load = $_POST['load'] ?? 0;
+        $sInst->active = 1;
         $sInst->save();
 
         return "success";
@@ -99,11 +100,10 @@ class ScheduleController extends Controller
 
         $subject = Subject::where('code', $exp[0])->first();
 
-        $instance = SubjectInstance::where('term_id', $term->id)->where('subject_id', $subject->id)->first();
-        $instance->active = 0;
-        $instance->save();
+        //TODO: change to soft delete when implementing versioning ca2-49
+        SubjectInstance::where('term_id', $term->id)->where('subject_id', $subject->id)->first()->delete();
 
-        return $this->index();
+        return 'success';
     }
 
     public function publishSchedule(){
