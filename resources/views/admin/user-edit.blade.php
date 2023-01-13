@@ -55,9 +55,9 @@
             </div>
             <div class="col-4">
                 <select id="userType" name="userType" class="selectpicker w-100 border rounded border-primary">
-                    @foreach(UserController::getUserTypes() as $id => $type)
-                        <option value="{{ $id }}" @if (($user->userType ?? 0) == $id) selected @endif>{{ $type }}</option>
-                    @endforeach
+                    @for($i = 0; $i <= Session::get('user')->userType; $i++)
+                        <option value="{{ $i }}" @if (($user->userType ?? 0) == $i) selected @endif>{{ UserController::getUserTypes()[$i] }}</option>
+                    @endfor
                 </select>
             </div>
         </div>
