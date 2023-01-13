@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Imports\UsersImport;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('userType', '<=', Session::get('user')->userType)->get();
         return view('admin/users',['users'=>$users]);
     }
 
@@ -132,7 +133,8 @@ class UserController extends Controller
         ->with('success','User deleted successfully.');
 
     }
-      /**
+
+    /**
     * @return \Illuminate\Support\Collection
     */
     public function import()
@@ -145,8 +147,6 @@ class UserController extends Controller
             return back()->with('error', 'Error importing file');
         }
         return back();
-        
-       
     }
 
     public static function getUserTypes(): array
