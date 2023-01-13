@@ -120,7 +120,7 @@ class ScheduleController extends Controller
 
     public function lecturerSchedule(){
         $userId = Session::get('user')->id;
-        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
+        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->orWhereRelation('user', 'support_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
         $arr = [];
         foreach($subjectInstances as $instance){
             if($instance['active'] == 1) {
@@ -130,10 +130,10 @@ class ScheduleController extends Controller
                         'name' => $instance['subject']['name'],
                         'color' => $instance['subject']['color'],
                         'instances' => [
-                            $instance['term']['year'] . '_' . $instance['term']['month']]
-                    ];
+                            $instance['term']['year'] . '_' . $instance['term']['month'] => $instance['user_id']
+                    ]];
                 } else {
-                    array_push($arr[$instance['subject']['code']]['instances'], $instance['term']['year'] . '_' . $instance['term']['month']);
+                    $arr[$instance['subject']['code']]['instances'][$instance['term']['year'] . '_' . $instance['term']['month']] = $instance['user_id'];
                 }
             }
         }

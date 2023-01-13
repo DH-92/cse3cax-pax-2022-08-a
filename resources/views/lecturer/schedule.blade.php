@@ -17,9 +17,10 @@
 
         for($i = 0; $i < count($months); $i++){
             $term = $year . "_" . strtoupper($months[$i]);
-            if(in_array($term, $subject['instances'])){
-                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-1 pb-1 border border-dark text-truncate" style="background-color:' . ($subject['color'] ?? "white") . '"} >
-                <p class="text-dark">' . $term . '</p>
+            if(in_array($term, $terms)){
+                $primary = ($subject['instances'][$term] != Session::get('user')->id) ? '<i class="fa-regular fa-user"></i>' : '<i class="fa-solid fa-user"></i>';
+                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-2 border border-dark text-truncate" style="background-color:' . ($subject['color'] ?? "white") . '"} >
+                <p class="text-dark h5">' . $primary . '</p>
                 </div>';
             }
         }
