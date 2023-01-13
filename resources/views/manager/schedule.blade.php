@@ -7,12 +7,9 @@
 
 {{--Actual content starts here--}}
 @php
-    //TODO: remove hardcoded data - sample of data required for display
-    //Sample of data returned when querying where("year", 2022).where("active", 1)
-
-    //Below to remain
+    //TODO: remove hardcoding when implementing pagination ca2-95
     $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    $year = 2022; //TODO: put into Route for pagination
+    $year = 2022;
     $schedule = [];
 
     foreach ($subjects as $key => $subject){
@@ -23,10 +20,11 @@
             $style = null;
             $term = $year . "_" . strtoupper($months[$i]);
             if(in_array($term, $terms)){
+                $published = (($subject['instances'][$term]['published']) == 1) ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-regular fa-circle-check"></i>';
                 $user = $subject['instances'][$term]['user'];
-                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
+                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-1 pb-1 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
                 <a class="assigned" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
-                        ' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
+                    ' . $published . '<br />' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
                     </a>
                 </div>';
             }
@@ -34,13 +32,12 @@
         $schedule[$key] = $rows;
     }
 @endphp
-<div class="col-1 offset-7 text-center">
-<button id="import" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
-    Import
-</button>
+<div class="col-2 offset-6 text-center">
+    <button id="publish" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
+        Publish Schedule
+    </button>
 </div>
 <div class="manager-schedule container-fluid border border-dark">
-<div class="container-fluid border border-dark">
     <div class="row">
         <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
             <h5 class="text-light font-weight-bold">Subject</h5>
@@ -62,10 +59,10 @@
             <div class="col-2 px-0 border border-dark">
                 <div class="container">
                     <div class="row">
-                        <div class="col-9  pt-2 pb-2">
-                            <a href="#" class="h5 text-primary">
+                        <div class="col-9 pt-2">
+                            <p class="h5 text-dark">
                                 {{$code}}
-                            </a>
+                            </p>
                         </div>
                         <div class="col-3">
                             @if($subject['instances'] != [])
@@ -86,7 +83,7 @@
                     </div>
                     <div class="row collapse" id="{{$code}}-multiple">
                         <div class="col">
-                            {{$subject['name']}}
+                            <small>{{$subject['name']}}</small>
                         </div>
                     </div>
                 </div>
@@ -146,6 +143,10 @@
 </div>
 @include('modal.modal')
 <script type="text/javascript">
+    document.getElementById('publish').addEventListener("click", function () {
+        publish();
+    });
+
     function collapse(subjectCode) {
         document.querySelectorAll("[id*=" + subjectCode + "-single]").forEach(function(div) {
             div.classList.remove("collapse");
@@ -174,6 +175,22 @@
     function createInstance(instanceCode) {
         $('#modal-content').empty();
         $.get("/modal/createInstance/" + instanceCode, function (data) {
+            $('#modal-content').append(data);
+        });
+    }
+
+    function publish() {
+        let unassigned = false; //TODO: link to unassigned lecturer Jira issue
+        let overload = false; //TODO: link to overloaded lecturer warning jira issue
+        let validate = 0;
+
+        if(unassigned || overload){
+            validate += (unassigned) ? 1 : 0;
+            validate += (overload) ? 2 : 0;
+        }
+
+        $('#modal-content').empty();
+        $.get("/modal/publish/" + validate, function (data) {
             $('#modal-content').append(data);
         });
     }

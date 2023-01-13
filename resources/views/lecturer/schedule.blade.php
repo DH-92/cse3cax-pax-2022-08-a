@@ -18,12 +18,8 @@
         for($i = 0; $i < count($months); $i++){
             $term = $year . "_" . strtoupper($months[$i]);
             if(in_array($term, $subject['instances'])){
-                //TODO: Subject information modal
-                //TODO: Subject color?? - will have to alter model
-                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-3 pb-3 border border-dark text-truncate" style="background-color:' . ($subject['color'] ?? "white") . '"} >
-                <a class="text-primary" href="#" onclick="" data-bs-toggle="modal" data-bs-target="#modal">
-                        ' . $term . '
-                    </a>
+                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-1 pb-1 border border-dark text-truncate" style="background-color:' . ($subject['color'] ?? "white") . '"} >
+                <p class="text-dark">' . $term . '</p>
                 </div>';
             }
         }
@@ -53,10 +49,10 @@
                 <div class="col-2 px-0 border border-dark">
                     <div class="container">
                         <div class="row">
-                            <div class="col-9 pt-2 pb-2">
-                                <a href="#" class="h5 text-primary">
+                            <div class="col-9 pt-2">
+                                <p class="h5 text-dark">
                                     {{$code}}
-                                </a>
+                                </p>
                             </div>
                             <div class="col-3">
                                 @if($subject['instances'] != [])
@@ -75,9 +71,9 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="row collapse pt-0" id="{{$code}}-multiple">
+                        <div class="row collapse" id="{{$code}}-multiple">
                             <div class="col">
-                                {{$subject['name']}}
+                                <small>{{$subject['name']}}</small>
                             </div>
                         </div>
                     </div>
@@ -85,7 +81,7 @@
                 <div class="col-10 px-0">
                     <div class="container h-100">
                         @php
-                            echo('<div class="row h-100" id="' . $code . '-single">');
+                            echo('<div class="row" id="' . $code . '-single">');
                             //Single row view
                             for($i = 0; $i < count($months); $i++){
                                 $term = $year . '_' . strtoupper($months[$i]);

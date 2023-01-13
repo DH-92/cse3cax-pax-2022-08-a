@@ -32,6 +32,7 @@ class ModalController extends BaseController
         $subject = Subject::where("code", $code[0])->first();
         $instance = SubjectInstance::where("term_id", $term->id)->where("subject_id", $subject->id)->first();
         $result['load'] = $instance->load;
+        $result['published'] = $instance->published;
 
         $result['assigned'] = "";
         if($instance->user_id != null){
@@ -61,8 +62,8 @@ class ModalController extends BaseController
         return true;
     }
 
-    public function import(){
-        return view('modal/import');
+    public function publish($id){
+        return view('modal/publish', ['id' => $id]);
     }
 
     public function error(String $message){

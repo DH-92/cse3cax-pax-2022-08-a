@@ -52,6 +52,7 @@ class ScheduleController extends Controller
         $sInst->term_id = $term->id;
         $sInst->version = 1;
         $sInst->user_id = $lecturer->id??NULL;
+        $sInst->published = $_POST['published'];
         $sInst->support_id = $support->id??NULL;
         $sInst->lecturer_load = $lecturer_load;
         $sInst->load = $_POST['load'] ?? 0;
@@ -84,14 +85,27 @@ class ScheduleController extends Controller
         $model->support_id = $support->id?? NULL;
         $model->user_id = $lecturer->id ?? null;
         $model->load = $_POST['load'];
+        $model->published = $_POST['published'];
         $model->save();
 
         return "success";
     }
 
+    public function publishSchedule(){
+        $instances = SubjectInstance::all();//TODO: change to only instances within the current schedule when implementing pagination ca2-95
+
+        foreach($instances as $instance){
+            $instance->published = 1;
+            if(!$instance->save()){
+               return "failed to publish some instances";
+            }
+        }
+        return "success";
+    }
+
     public function lecturerSchedule(){
         $userId = Session::get('user')->id;
-        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->with('subject', 'term')->get()->toArray();
+        $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
         $arr = [];
         foreach($subjectInstances as $instance){
             $bool = array_key_exists($instance['subject']['code'], $arr);
