@@ -7,12 +7,9 @@
 
 {{--Actual content starts here--}}
 @php
-    //TODO: remove hardcoded data - sample of data required for display
-    //Sample of data returned when querying where("year", 2022).where("active", 1)
-
-    //Below to remain
+    //TODO: remove hardcoding when implementing pagination ca2-95
     $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    $year = 2022; //TODO: put into Route for pagination
+    $year = 2022;
     $schedule = [];
 
     foreach ($subjects as $key => $subject){

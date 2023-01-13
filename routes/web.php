@@ -45,6 +45,7 @@ Route::get('manager/users/delete/{id}', [UserController::class, 'destroy'])->mid
 
 Route::post('instance/create', [ScheduleController::class, 'storeInstance'])->middleware('auth:1');
 Route::post('instance/assignLecturer', [ScheduleController::class, 'assignLecturer'])->middleware('auth:1');
+Route::post('schedule/publish', [ScheduleController::class, 'publishSchedule'])->middleware('auth:1');
 
 // admin routes
 Route::redirect('administrator', 'admin');

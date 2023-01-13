@@ -91,6 +91,18 @@ class ScheduleController extends Controller
         return "success";
     }
 
+    public function publishSchedule(){
+        $instances = SubjectInstance::all();//TODO: change to only instances within the current schedule when implementing pagination ca2-95
+
+        foreach($instances as $instance){
+            $instance->published = 1;
+            if(!$instance->save()){
+               return "failed to publish some instances";
+            }
+        }
+        return "success";
+    }
+
     public function lecturerSchedule(){
         $userId = Session::get('user')->id;
         $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
