@@ -59,10 +59,10 @@
             <div class="col-2 px-0 border border-dark">
                 <div class="container">
                     <div class="row">
-                        <div class="col-9  pt-2 pb-2">
-                            <a href="#" class="h5 text-primary">
+                        <div class="col-9 pt-2">
+                            <p class="h5 text-dark">
                                 {{$code}}
-                            </a>
+                            </p>
                         </div>
                         <div class="col-3">
                             @if($subject['instances'] != [])
@@ -83,7 +83,7 @@
                     </div>
                     <div class="row collapse" id="{{$code}}-multiple">
                         <div class="col">
-                            {{$subject['name']}}
+                            <small>{{$subject['name']}}</small>
                         </div>
                     </div>
                 </div>
