@@ -130,10 +130,10 @@ class ScheduleController extends Controller
                         'name' => $instance['subject']['name'],
                         'color' => $instance['subject']['color'],
                         'instances' => [
-                            $instance['term']['year'] . '_' . $instance['term']['month']]
-                    ];
+                            $instance['term']['year'] . '_' . $instance['term']['month'] => $instance['user_id']
+                    ]];
                 } else {
-                    array_push($arr[$instance['subject']['code']]['instances'], $instance['term']['year'] . '_' . $instance['term']['month']);
+                    $arr[$instance['subject']['code']]['instances'][$instance['term']['year'] . '_' . $instance['term']['month']] = $instance['user_id'];
                 }
             }
         }
