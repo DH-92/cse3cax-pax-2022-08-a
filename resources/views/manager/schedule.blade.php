@@ -38,7 +38,6 @@
     </button>
 </div>
 <div class="manager-schedule container-fluid border border-dark">
-<div class="container-fluid border border-dark">
     <div class="row">
         <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
             <h5 class="text-light font-weight-bold">Subject</h5>
