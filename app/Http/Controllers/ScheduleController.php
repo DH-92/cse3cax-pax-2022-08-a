@@ -19,10 +19,12 @@ class ScheduleController extends Controller
 
         foreach($subjects as $k => $subject){
             foreach($subject['instances'] as $oldkey => $instance){
-                //reassign array keys for each instance to YYYY_MMM e.g. '2022_JAN'
-                $newInstKey = $instance['term']['year'].'_'.$instance['term']['month'];
-                $subject['instances'][$newInstKey] = $subject['instances'][$oldkey];
-                unset($subject['instances'][$oldkey]);
+                if($instance['active'] == 1) {
+                    //reassign array keys for each instance to YYYY_MMM e.g. '2022_JAN'
+                    $newInstKey = $instance['term']['year'] . '_' . $instance['term']['month'];
+                    $subject['instances'][$newInstKey] = $subject['instances'][$oldkey];
+                    unset($subject['instances'][$oldkey]);
+                }
             }
             //reassign array keys for each subject to CODE e.g. 'CSE1ITX'
             $subjects[$k]['instances'] = $subject['instances'];
@@ -56,6 +58,7 @@ class ScheduleController extends Controller
         $sInst->support_id = $support->id??NULL;
         $sInst->lecturer_load = $lecturer_load;
         $sInst->load = $_POST['load'] ?? 0;
+        $sInst->active = 1;
         $sInst->save();
 
         return "success";
@@ -91,6 +94,18 @@ class ScheduleController extends Controller
         return "success";
     }
 
+    public function deleteInstance(Request $request, $id){
+        $exp = explode('_', $id);
+        $term = Term::where('year', $exp[1])->where('month', $exp[2])->first();
+
+        $subject = Subject::where('code', $exp[0])->first();
+
+        //TODO: change to soft delete when implementing versioning ca2-49
+        SubjectInstance::where('term_id', $term->id)->where('subject_id', $subject->id)->first()->delete();
+
+        return 'success';
+    }
+
     public function publishSchedule(){
         $instances = SubjectInstance::all();//TODO: change to only instances within the current schedule when implementing pagination ca2-95
 
@@ -108,16 +123,18 @@ class ScheduleController extends Controller
         $subjectInstances = SubjectInstance::whereRelation('user', 'user_id', '=', $userId)->where('published', 1)->with('subject', 'term')->get()->toArray();
         $arr = [];
         foreach($subjectInstances as $instance){
-            $bool = array_key_exists($instance['subject']['code'], $arr);
-            if(!array_key_exists($instance['subject']['code'], $arr)){
-                $arr[$instance['subject']['code'] ] = [
-                    'name' => $instance['subject']['name'],
-                    'color' => $instance['subject']['color'],
-                    'instances' => [
-                        $instance['term']['year'].'_'.$instance['term']['month']]
-                ];
-            }else{
-                array_push($arr[$instance['subject']['code']]['instances'],$instance['term']['year'].'_'.$instance['term']['month']);
+            if($instance['active'] == 1) {
+                $bool = array_key_exists($instance['subject']['code'], $arr);
+                if (!array_key_exists($instance['subject']['code'], $arr)) {
+                    $arr[$instance['subject']['code']] = [
+                        'name' => $instance['subject']['name'],
+                        'color' => $instance['subject']['color'],
+                        'instances' => [
+                            $instance['term']['year'] . '_' . $instance['term']['month']]
+                    ];
+                } else {
+                    array_push($arr[$instance['subject']['code']]['instances'], $instance['term']['year'] . '_' . $instance['term']['month']);
+                }
             }
         }
         // dd($arr);
