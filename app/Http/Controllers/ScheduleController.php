@@ -91,6 +91,19 @@ class ScheduleController extends Controller
         return "success";
     }
 
+    public function deleteInstance(Request $request, $id){
+        $exp = explode('_', $id);
+        $term = Term::where('year', $exp[1])->where('month', $exp[2])->first();
+
+        $subject = Subject::where('code', $exp[0])->first();
+
+        $instance = SubjectInstance::where('term_id', $term->id)->where('subject_id', $subject->id)->first();
+        $instance->active = 0;
+        $instance->save();
+
+        return $this->index();
+    }
+
     public function publishSchedule(){
         $instances = SubjectInstance::all();//TODO: change to only instances within the current schedule when implementing pagination ca2-95
 

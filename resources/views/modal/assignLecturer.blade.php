@@ -76,6 +76,9 @@
     @endif
 </div>
 <div class="modal-footer">
+    <div class="col float-start">
+        <a href="/instance/delete/{{$id}}" class="btn btn-danger" role="button">Delete Instance</a>
+    </div>
     @if(!$lecturers->isEmpty())
     <button type="button" id="submitLecturer" class="btn btn-primary">Save</button>
     @endif
