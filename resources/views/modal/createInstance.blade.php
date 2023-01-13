@@ -128,10 +128,11 @@
             var supportLecturer = $('#support-lecturer').val();
             var lecturer_load = $('#lblLecturerLoad').text();
             var load = $('#load').val() / 100;
+            var published = (document.getElementById('published').checked) ? 1 : 0;
             $.ajax({
                 method: "POST",
                 url: "/instance/create",
-                data: { instance: instance, lecturer: lecturer, load: load , support: supportLecturer, lecturer_load: lecturer_load}
+                data: { instance: instance, lecturer: lecturer, load: load , support: supportLecturer, lecturer_load: lecturer_load, published: published}
                 })
                 .done(function( msg ) {
                     location.reload();
