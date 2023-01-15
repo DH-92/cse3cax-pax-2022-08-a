@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subject;
-use App\Http\Requests\StoreSubjectRequest;
-use App\Http\Requests\UpdateSubjectRequest;
-use Illuminate\Http\Request;
 use App\Imports\SubjectsImport;
+use App\Models\Subject;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SubjectController extends Controller
@@ -19,7 +17,8 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::all();
-        return view('admin/subjects', ['subjects'=>$subjects]);
+
+        return view('admin/subjects', ['subjects' => $subjects]);
     }
 
     /**
@@ -35,21 +34,23 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        Subject::create($request->all('code', 'name', 'description','color'));
+        Subject::create($request->all('code', 'name', 'description', 'color'));
 
         return redirect('admin/subjects')
-        ->with('success','Subject created successfully');
+        ->with('success', 'Subject created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Subject  $subject
+     * @param \App\Models\Subject $subject
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Subject $subject)
@@ -60,20 +61,23 @@ class SubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subject  $subject
+     * @param \App\Models\Subject $subject
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($code)
     {
-        $subject = Subject::where('code',$code)->first();
-        return view('admin/subject-edit',['subject'=>$subject]);
+        $subject = Subject::where('code', $code)->first();
+
+        return view('admin/subject-edit', ['subject' => $subject]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subject  $subject
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Subject $subject
+     *
      * @return \Illuminate\Http\Response
      */
     public function update($code, Request $request, Subject $subject)
@@ -83,26 +87,27 @@ class SubjectController extends Controller
             'name' => 'required',
         ]);
 
-        $subject = Subject::where('code',$code)->first();
-        $subject->update($request->all('code', 'name', 'description','color'));
+        $subject = Subject::where('code', $code)->first();
+        $subject->update($request->all('code', 'name', 'description', 'color'));
 
         return redirect('admin/subjects')
-        ->with('success','Subject updated successfully');
+        ->with('success', 'Subject updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subject  $subject
+     * @param \App\Models\Subject $subject
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($code)
     {
-        $subject = Subject::where('code',$code)->first();
+        $subject = Subject::where('code', $code)->first();
         $subject->delete();
 
         return redirect('admin/subjects')
-        ->with('success','Subject deleted successfully');
+        ->with('success', 'Subject deleted successfully');
     }
 
     public static function getSubjects(): \Illuminate\Database\Eloquent\Collection
@@ -110,18 +115,19 @@ class SubjectController extends Controller
         return Subject::all();
     }
 
-        /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function import() 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function import()
     {
-        try{
-            Excel::import(new SubjectsImport,request()->file('file'));
-            return redirect()->back()->with('success','Data Imported Successfully');
-        }
-        catch(\Exception $ex){
+        try {
+            Excel::import(new SubjectsImport, request()->file('file'));
+
+            return redirect()->back()->with('success', 'Data Imported Successfully');
+        } catch (\Exception $ex) {
             return back()->with('error', 'Error importing file');
-        }   
+        }
+
         return back();
     }
 }

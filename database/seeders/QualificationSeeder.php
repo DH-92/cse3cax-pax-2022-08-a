@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
 
 class QualificationSeeder extends Seeder
 {
@@ -19,12 +17,12 @@ class QualificationSeeder extends Seeder
         DB::table('subject_user')->insert(
             [
                 [
-                'subject_id' => '1',
-                'user_id' => '1',
+                    'subject_id' => '1',
+                    'user_id' => '1',
                 ],
                 [
-                'subject_id' => '2',
-                'user_id' => '1',
+                    'subject_id' => '2',
+                    'user_id' => '1',
                 ],
                 [
                     'subject_id' => '3',
@@ -74,14 +72,14 @@ class QualificationSeeder extends Seeder
                     'subject_id' => '35',
                     'user_id' => '1',
                 ],
-            //user 2
+                //user 2
                 [
-                'subject_id' => '1',
-                'user_id' => '2',
+                    'subject_id' => '1',
+                    'user_id' => '2',
                 ],
                 [
-                'subject_id' => '2',
-                'user_id' => '2',
+                    'subject_id' => '2',
+                    'user_id' => '2',
                 ],
                 [
                     'subject_id' => '4',
@@ -130,12 +128,12 @@ class QualificationSeeder extends Seeder
 
                 //User 3
                 [
-                'subject_id' => '1',
-                'user_id' => '3',
+                    'subject_id' => '1',
+                    'user_id' => '3',
                 ],
                 [
-                'subject_id' => '4',
-                'user_id' => '3',
+                    'subject_id' => '4',
+                    'user_id' => '3',
                 ],
                 [
                     'subject_id' => '6',
@@ -187,8 +185,8 @@ class QualificationSeeder extends Seeder
                 ],
                 //USER 4
                 [
-                'subject_id' => '2',
-                'user_id' => '4',
+                    'subject_id' => '2',
+                    'user_id' => '4',
                 ],
                 [
                     'subject_id' => '4',
@@ -266,7 +264,7 @@ class QualificationSeeder extends Seeder
                     'subject_id' => '10',
                     'user_id' => '6',
                 ],
-                
+
                 //USER 7
                 [
                     'subject_id' => '1',
@@ -348,7 +346,7 @@ class QualificationSeeder extends Seeder
                 //USER 10
                 [
                     'subject_id' => '18',
-                    'user_id' => '10'
+                    'user_id' => '10',
                 ],
 
                 //USER 11
