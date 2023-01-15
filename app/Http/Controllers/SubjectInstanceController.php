@@ -11,17 +11,19 @@ class SubjectInstanceController extends Controller
      * Display a listing of the resource.
      ** determines if request if for lecturer or manager
      * TODO update to use roles or permissions
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $currentURL = url()->current();
-        $redirectURL = "";
-        if(Str::contains($currentURL, 'lecturer')){
-            $redirectURL = "lecturer/schedule";
-        }else{
-            $redirectURL = "manager/schedule";
+        $redirectURL = '';
+        if (Str::contains($currentURL, 'lecturer')) {
+            $redirectURL = 'lecturer/schedule';
+        } else {
+            $redirectURL = 'manager/schedule';
         }
+
         return view($redirectURL);
     }
 
@@ -38,7 +40,8 @@ class SubjectInstanceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,7 +52,8 @@ class SubjectInstanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +64,8 @@ class SubjectInstanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,8 +76,9 @@ class SubjectInstanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,7 +89,8 @@ class SubjectInstanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
