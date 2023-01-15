@@ -38,7 +38,6 @@ fi
 
 php artisan storage:link
 
-
 if [[ $# -eq 0 ]]; then
     exec /usr/local/bin/caddy run --config "${CADDY_PATH}"
 fi
