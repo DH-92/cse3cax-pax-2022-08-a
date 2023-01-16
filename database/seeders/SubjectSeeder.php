@@ -55,6 +55,11 @@ class SubjectSeeder extends Seeder
         ]);
 
         DB::table('subjects')->insert([
+            'code' => 'CSE1SIX',
+            'name' => 'Information System Infrastructure',
+        ]);
+
+        DB::table('subjects')->insert([
             'code' => 'CSE1IOX',
             'name' => 'Intermediate Object Oriented Programming',
         ]);

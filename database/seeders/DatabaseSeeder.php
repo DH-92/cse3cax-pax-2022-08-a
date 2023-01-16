@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SubjectSeeder::class,
             TermSeeder::class,
+            QualificationSeeder::class,
+            SubjectInstanceSeeder::class,
         ]);
     }
 }

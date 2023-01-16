@@ -15,163 +15,68 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'firstName' => 'Acacia',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'acacia@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
+        $userTypes = [
+            'lecturer' => 0,
+            'manager' => 1,
+            'admin' => 2,
+        ];
 
-        DB::table('users')->insert([
-            'firstName' => 'Beech',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'beech@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
+        $maxLoadToEmploymentType = [
+            '1' => 'Full-time',
+            '0.8' => 'Semi-part-time',
+            '0.6' => 'Part-time',
+            '0.4' => 'Casual',
+            '0' => 'Full-time',
+        ];
 
-        DB::table('users')->insert([
-            'firstName' => 'Cypress',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'cypress@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
+        //lecturers and loads from the initial scheduleSummaries.xlxs file
+        $lecturers = [
+            'Acacia' => '1',
+            'Beech' => '1',
+            'Cypress' => '1',
+            'Douglas' => '0.8',
+            'Eucalypt' => '0.4',
+            'Flame' => '1',
+            'Guava' => '0.6',
+            'Hickory' => '0.8',
+            'Ironbark' => '1',
+            'Jacaranda' => '0.4',
+            'Karri' => '1',
+            'Laurel' => '1',
+            'Maple' => '1',
+            'lecturer' => '0',
+        ];
 
-        DB::table('users')->insert([
-            'firstName' => 'Douglas',
-            'maxLoad' => '0.8',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'douglas@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Eucalypt',
-            'maxLoad' => '0.4',
-            'employmentType' => 'Casual',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'eucalypt@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Flame',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'flame@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Guava',
-            'maxLoad' => '0.6',
-            'employmentType' => 'Part-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'guava@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Hickory',
-            'maxLoad' => '0.8',
-            'employmentType' => 'Other',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'hickory@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Ironbark',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'ironbark@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Jacaranda',
-            'maxLoad' => '0.4',
-            'employmentType' => 'Temp',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'jacaranda@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Karri',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Intern',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'karri@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Laurel',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Casual',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'laurel@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Mapel',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Part-time',
-            'userType' => '0',
-            'phone' => '0412 345 678',
-            'email' => 'mapel@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
-
-        DB::table('users')->insert([
-            'firstName' => 'Lecturer',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '0',
-            'phone' => 'NULL',
-            'email' => 'lecturer@ltu.edu.au',
-            'password' => Hash::make('password'),
-        ]);
+        foreach ($lecturers as $firstName => $maxLoad) {
+            DB::table('users')->insert([
+                'firstName' => $firstName,
+                'email' => $firstName.'@ltu.edu.au',
+                'userType' => $userTypes['lecturer'],
+                'maxLoad' => $maxLoad,
+                'employmentType' => $maxLoadToEmploymentType[$maxLoad],
+                'phone' => '04'.random_int(10000000, 99999999),
+                'password' => Hash::make('password'),
+                'color' => '#'.random_int(25, 99).random_int(25, 99).random_int(25, 99),
+            ]);
+        }
 
         DB::table('users')->insert([
             'firstName' => 'Manager',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '1',
-            'phone' => 'NULL',
             'email' => 'manager@ltu.edu.au',
+            'userType' => $userTypes['manager'],
+            'maxLoad' => '0',
+            'employmentType' => 'Full-time',
+            'phone' => '04'.random_int(10000000, 99999999),
             'password' => Hash::make('password'),
         ]);
 
         DB::table('users')->insert([
             'firstName' => 'Admin',
-            'maxLoad' => '1.0',
-            'employmentType' => 'Full-time',
-            'userType' => '2',
-            'phone' => 'NULL',
             'email' => 'admin@ltu.edu.au',
+            'userType' => $userTypes['admin'],
+            'maxLoad' => '0',
+            'employmentType' => 'Full-time',
+            'phone' => '04'.random_int(10000000, 99999999),
             'password' => Hash::make('password'),
         ]);
     }
