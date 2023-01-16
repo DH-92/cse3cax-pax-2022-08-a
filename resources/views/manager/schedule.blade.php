@@ -10,24 +10,65 @@
     //TODO: remove hardcoding when implementing pagination ca2-95
     $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     $year = 2022;
+    $load_limit = 8;
     $schedule = [];
 
-    foreach ($subjects as $key => $subject){
-        $terms = array_keys($subject['instances']);
-        $rows = [];
 
-        for($i = 0; $i < count($months); $i++){
-            $style = null;
-            $term = $year . "_" . strtoupper($months[$i]);
-            if(in_array($term, $terms)){
-                $published = (($subject['instances'][$term]['published']) == 1) ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-regular fa-circle-check"></i>';
-                $user = $subject['instances'][$term]['user'];
-                $rows[0][$i] = '<div class="col-%s h-100 text-center pt-1 pb-1 border border-dark text-truncate" style="background-color:' . ($user['color'] ?? "black") . '"}>
-                <a class="assigned" href="#" onclick="assignLecturer(\'' . $key . '_' . $term . '\')" data-bs-toggle="modal" data-bs-target="#modal">
-                    ' . $published . '<br />' . ($user['firstName'] ?? '<i class="fa-solid fa-triangle-exclamation text-danger"></i> Unassigned') . '
-                    </a>
-                </div>';
+    //generate overload data for schedule view
+    $loadByTermByUser = [];
+    $overloadedUsersByMonth = [];
+    foreach ($subjects as $key => $subject){
+        for ($i = 0; $i < count($months); $i++) {
+            $currTerm = $year . "_" . strtoupper($months[$i]);
+            $instance = $subject['instances'][$currTerm] ?? null;
+            if (!$instance) continue;
+            $user = $instance['user'];
+            if (!$user) continue;
+            $userId = $user['id'];
+            $loadByTermByUser[$userId] = $loadByTermByUser[$userId] ?? [];
+            $loadByTermByUser[$userId][$currTerm] = $loadByTermByUser[$userId][$currTerm] ?? 0;
+            $loadByTermByUser[$userId][$currTerm]++;
+
+            $term2 = ($i >= 11)
+                ? $year+1 . "_" . strtoupper($months[($i+1)%12])
+                : $year . "_" . strtoupper($months[$i+1]);
+            $loadByTermByUser[$userId][$term2] = $loadByTermByUser[$userId][$term2] ?? 0;
+            $loadByTermByUser[$userId][$term2]++;
+
+            $term3 = ($i >= 10)
+                ? $year+1 . "_" . strtoupper($months[($i+2)%12])
+                : $year . "_" . strtoupper($months[$i+2]);
+            $loadByTermByUser[$userId][$term3] = $loadByTermByUser[$userId][$term3] ?? 0;
+            $loadByTermByUser[$userId][$term3]++;
+
+            if($loadByTermByUser[$userId][$currTerm] >= $user['maxLoad']*$load_limit) {
+                $overloadedUsersByMonth[$months[$i]] = $overloadedUsersByMonth[$months[$i]] ?? [];
+                array_push($overloadedUsersByMonth[$months[$i]], $user['firstName']);
             }
+        }
+    }
+
+    foreach ($subjects as $key => $subject){
+        $rows = [];
+        for($i = 0; $i < count($months); $i++){
+            $term = $year . "_" . strtoupper($months[$i]);
+            $instance = $subject['instances'][$term] ?? null;
+            if (!$instance) continue;
+            $user = $subject['instances'][$term]['user'];
+            if (!$user) {
+                $icon = '<i class="fa-solid fa-triangle-exclamation text-danger"></i>';
+                $name = 'Empty';
+            } else {
+                $isPublished = $subject['instances'][$term]['published'] == 1;
+                $icon = $isPublished
+                    ? '<i class="fa-solid fa-circle-check"></i>' 
+                    : '<i class="fa-regular fa-circle-check"></i>';
+                $name = $user['firstName'];
+            }
+            $color = $user['color'] ?? "white";
+            $rows[0][$i]  = "<div class=\"col-%s h-100 text-center pt-1 pb-1 border border-dark text-truncate\" style=\"background-color:{$color}\"";
+            $rows[0][$i] .= "<a class=\"assigned\" href=\"#\" onclick=\"assignLecturer('{$key}_{$term}')\" data-bs-toggle=\"modal\" data-bs-target=\"#modal\">";
+            $rows[0][$i] .= "{$icon} <br /> {$name} </a> </div>";
         }
         $schedule[$key] = $rows;
     }
@@ -41,6 +82,10 @@
     <div class="row">
         <div class="col-2 bg-didasko text-center border border-dark pt-2 pb-1">
             <h5 class="text-light font-weight-bold">Subject</h5>
+            @if(!empty($overloadedUsersByMonth))
+            <hr/>
+            <h5 class="text-danger">Overloaded Lecturers</h5>
+            @endif
         </div>
         <div class="col-10 px-0">
             <div class="container">
@@ -48,6 +93,14 @@
                     @foreach($months as $month)
                         <div class="col bg-didasko text-center border border-dark pt-2 pb-1">
                             <h5 class="text-light font-weight-bold">{{ $month }}</h5>
+                            @if(!empty($overloadedUsersByMonth))
+                                <hr/>
+                                @isset($overloadedUsersByMonth[$month])
+                                @foreach($overloadedUsersByMonth[$month] as $name)
+                                    <h5 class="text-danger">{{ $name }}</h5>
+                                @endforeach
+                                @endisset
+                            @endif
                         </div>
                     @endforeach
                 </div>
