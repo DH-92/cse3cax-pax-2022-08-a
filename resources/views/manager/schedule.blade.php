@@ -10,7 +10,7 @@
     //TODO: remove hardcoding when implementing pagination ca2-95
     $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     $year = 2022;
-    $load_limit = 8;
+    $load_limit = 6;
     $schedule = [];
 
 
