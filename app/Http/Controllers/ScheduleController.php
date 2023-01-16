@@ -68,24 +68,26 @@ class ScheduleController extends Controller
         $instance = $_POST['instance'];
         $inst_arr = explode('_', $instance);
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
-        $lecturer_load = $_POST['lecturer_load'];
         $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
 
         $model = SubjectInstance::where('subject_id', $subject->id)
                                 ->where('term_id', $term->id)->first();
 
-        if (isset($_POST['lecturer']) && $_POST['lecturer'] != 'Select a Lecturer') {
+        if (isset($_POST['lecturer'])) {
             $lecturer = User::find($_POST['lecturer']);
+            if ($lecturer) {
+                $model->user_id = $lecturer->id ?? null;
+
+                if (isset($_POST['support']) && $_POST['support'] != 0) {
+                    $support = User::find($_POST['support']);
+                    if ($support) {
+                        $model->support_id = $support->id ?? null;
+                        $model->lecturer_load = $_POST['lecturer_load'];
+                    }
+                }
+            }
         }
 
-        if (isset($_POST['support']) && $_POST['support'] != 0) {
-            $support = User::find($_POST['support']);
-        }
-
-        $model->user_id = $lecturer->id;
-        $model->lecturer_load = $lecturer_load;
-        $model->support_id = $support->id ?? null;
-        $model->user_id = $lecturer->id ?? null;
         $model->load = $_POST['load'];
         $model->published = $_POST['published'];
         $model->save();
