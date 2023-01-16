@@ -103,11 +103,22 @@
                                             $length = (count($months)-$i > 3) ? 3 : count($months)-$i;
                                             echo(sprintf($schedule[$code][0][$i], $length));
                                             unset($schedule[$code][0][$i]);
+                                            $creates[$i] = false;
                                             $i += 2;
-                                        } else {
-                                            echo('<div class="col-1 text-center border border-dark pt-3 pb-3"></div>');
+                                            $previous = $i;
+                                        } elseif (!array_key_exists($i, $creates)) {
+                                            $previous = $i;
+                                            $creates[$i] = true;
+                                            echo('<div class="col-1 text-center border border-dark pt-3 pb-3">
+                                                    <a class="text-primary" href="#" onclick="createInstance(\'' . $code . '_' . $term . '\')" data-subject-instance="' . $term . '" data-bs-toggle="modal" data-bs-target="#modal">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </a>
+                                                </div>');
+                                        } elseif(!array_key_exists($i+1, $creates)) {
+                                            echo('<div class="col-' . $i-($previous ?? -1) . ' bg-disabled border border-dark"></div>');
                                         }
                                     }
+                                    unset($previous);
                                 echo('</div>');
                             }
                         @endphp
