@@ -143,13 +143,12 @@
                 method: "POST",
                 url: "/instance/assignLecturer",
                 data: { instance: instance, lecturer: lecturer, support: supportLecturer, load: load, lecturer_load: lecturer_load, published: published }
-
-        }).done(function( msg ) {
-                    location.reload();
-                    // alert( "Data Saved: " + msg );
+            }).done((msg) => {
+                location.reload();
+                // alert( "Data Saved: " + msg );
             });
+        });
     });
-});
 
     document.getElementById("lblLoad").addEventListener('change', setLoadValue(document.getElementById("load").value));
 
