@@ -56,7 +56,10 @@ class UserSeeder extends Seeder
                 'employmentType' => $maxLoadToEmploymentType[$maxLoad],
                 'phone' => '04'.random_int(10000000, 99999999),
                 'password' => Hash::make('password'),
-                'color' => '#'.random_int(25, 99).random_int(25, 99).random_int(25, 99),
+                'color' => '#'
+                    .dechex(random_int(100, 250))
+                    .dechex(random_int(100, 250))
+                    .dechex(random_int(100, 250)),
             ]);
         }
 
