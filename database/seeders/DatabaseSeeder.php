@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             TermSeeder::class,
             QualificationSeeder::class,
             SubjectInstanceSeeder::class,
-
         ]);
     }
 }
