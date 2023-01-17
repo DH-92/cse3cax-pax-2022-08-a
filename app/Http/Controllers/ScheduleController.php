@@ -68,10 +68,17 @@ class ScheduleController extends Controller
         $instance = $_POST['instance'];
         $inst_arr = explode('_', $instance);
         $subject = Subject::where('code', '=', $inst_arr[0])->first();
-        $term = Term::where('year', '=', $inst_arr[1])->where('month', '=', $inst_arr[2])->first();
-
+        $term = Term::where('year', '=', $inst_arr[1])
+                    ->where('month', '=', $inst_arr[2])->first();
         $model = SubjectInstance::where('subject_id', $subject->id)
                                 ->where('term_id', $term->id)->first();
+        abort_if(! $model, 400);
+
+        $model->user_id = null;
+        $model->support_id = null;
+        $model->lecturer_load = 100;
+        $model->load = $_POST['load'];
+        $model->published = $_POST['published'];
 
         if (isset($_POST['lecturer'])) {
             $lecturer = User::find($_POST['lecturer']);
@@ -88,8 +95,6 @@ class ScheduleController extends Controller
             }
         }
 
-        $model->load = $_POST['load'];
-        $model->published = $_POST['published'];
         $model->save();
 
         return 'success';
