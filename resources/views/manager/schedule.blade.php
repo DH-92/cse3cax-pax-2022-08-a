@@ -13,7 +13,8 @@
     $load_limit = 6;
     $schedule = [];
 
-
+    $unassigned = 0;
+    $overloaded = 0;
     //generate overload data for schedule view
     $loadByTermByUser = [];
     $overloadedUsersByMonth = [];
@@ -44,6 +45,7 @@
             if($loadByTermByUser[$userId][$currTerm] >= $user['maxLoad']*$load_limit) {
                 $overloadedUsersByMonth[$months[$i]] = $overloadedUsersByMonth[$months[$i]] ?? [];
                 array_push($overloadedUsersByMonth[$months[$i]], $user['firstName']);
+                $overloaded = 1;
             }
         }
     }
@@ -58,10 +60,11 @@
             if (!$user) {
                 $icon = '<i class="fa-solid fa-triangle-exclamation text-danger"></i>';
                 $name = 'Empty';
+                $unassigned = 1;
             } else {
                 $isPublished = $subject['instances'][$term]['published'] == 1;
                 $icon = $isPublished
-                    ? '<i class="fa-solid fa-circle-check"></i>' 
+                    ? '<i class="fa-solid fa-circle-check"></i>'
                     : '<i class="fa-regular fa-circle-check"></i>';
                 $name = $user['firstName'];
             }
@@ -233,8 +236,8 @@
     }
 
     function publish() {
-        let unassigned = false; //TODO: link to unassigned lecturer Jira issue
-        let overload = false; //TODO: link to overloaded lecturer warning jira issue
+        let unassigned = @php echo($unassigned); @endphp;
+        let overload = @php echo($overloaded); @endphp;
         let validate = 0;
 
         if(unassigned || overload){
