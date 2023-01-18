@@ -42,7 +42,7 @@
             $loadByTermByUser[$userId][$term3] = $loadByTermByUser[$userId][$term3] ?? 0;
             $loadByTermByUser[$userId][$term3]++;
 
-            if($loadByTermByUser[$userId][$currTerm] >= $user['maxLoad']*$load_limit) {
+            if($loadByTermByUser[$userId][$currTerm] > $user['maxLoad']*$load_limit) {
                 $overloadedUsersByMonth[$months[$i]] = $overloadedUsersByMonth[$months[$i]] ?? [];
                 array_push($overloadedUsersByMonth[$months[$i]], $user['firstName']);
                 $overloaded = 1;
