@@ -111,7 +111,7 @@
                                             $creates[$i] = true;
                                             echo('<div class="col-1 text-center border border-dark pt-3 pb-3">
                                                     <a class="text-primary" href="#" onclick="createInstance(\'' . $code . '_' . $term . '\')" data-subject-instance="' . $term . '" data-bs-toggle="modal" data-bs-target="#modal">
-                                                        <i class="fa-solid fa-plus"></i>
+                                                        <!-- <i class="fa-solid fa-plus"></i> -->
                                                     </a>
                                                 </div>');
                                         } elseif(!array_key_exists($i+1, $creates)) {
