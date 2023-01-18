@@ -151,77 +151,79 @@ class ScheduleController extends Controller
         return view('lecturer/schedule', ['subjects' => $arr]);
     }
 
-    public function autoAssign(){
+    public function autoAssign()
+    {
         $instances = SubjectInstance::whereRelation('term', 'year', '=', '2022')
         ->where([['published', '=', 0],
-                ['user_id', '=', null]])
+            ['user_id', '=', null], ])
         ->with('subject', 'term')
-        ->get()->keyBy('id');//->toArray()
+        ->get()->keyBy('id'); //->toArray()
 
         $qualified = [];
-        $months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        $months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-        foreach($instances as $instance){ 
-            if(!array_key_exists($instance->subject->code, $qualified)){ //build an array of qualified lecturers for each subject in $instances
+        foreach ($instances as $instance) {
+            if (! array_key_exists($instance->subject->code, $qualified)) { //build an array of qualified lecturers for each subject in $instances
                 $qualified[$instance->subject->code] = $instance->subject->lecturers()->get()->keyBy('id')->toArray();
             }
         }
         $grouped = $instances->groupBy('subject_id');
         $instance_arr = $grouped->toArray();
-        array_multiSort($qualified, $instance_arr);// SORT_ASC, sort array of subjects by the number of lecturers who are able to take the subject
+        array_multisort($qualified, $instance_arr); // SORT_ASC, sort array of subjects by the number of lecturers who are able to take the subject
 
-        $assigned = []; //array to track lecturer load as simple int, assigning lecturer to 1 instance adds 1 to the coresponding months the subject runs for 
-        foreach($qualified as $s){ 
-            foreach($s as $l){
-                $assigned[$l['id']] = ["JAN"=>0, "FEB"=>0, "MAR"=>0, "APR"=>0, "MAY"=>0, "JUN"=>0, "JUL"=>0, "AUG"=>0, "SEP"=>0, "OCT"=>0, "NOV"=>0, "DEC"=>0];
+        $assigned = []; //array to track lecturer load as simple int, assigning lecturer to 1 instance adds 1 to the coresponding months the subject runs for
+        foreach ($qualified as $s) {
+            foreach ($s as $l) {
+                $assigned[$l['id']] = ['JAN' => 0, 'FEB' => 0, 'MAR' => 0, 'APR' => 0, 'MAY' => 0, 'JUN' => 0, 'JUL' => 0, 'AUG' => 0, 'SEP' => 0, 'OCT' => 0, 'NOV' => 0, 'DEC' => 0];
             }
         }
 
-        foreach($instance_arr as $subject){ //iterate through array of subjects, try to assign lecturers
-            foreach($subject as $instance){
-                if(count($qualified[$instance['subject']['code']]) == 1){ //only one lecturer is qualified, assign to instance
+        foreach ($instance_arr as $subject) { //iterate through array of subjects, try to assign lecturers
+            foreach ($subject as $instance) {
+                if (count($qualified[$instance['subject']['code']]) == 1) { //only one lecturer is qualified, assign to instance
                     $model = SubjectInstance::find($instance['id']);
                     $model->user_id = array_key_first($qualified[$instance['subject']['code']]);
                     $model->save();
                     $instance['id'] = array_key_first($qualified[$instance['subject']['code']]);
                     $assigned[$model->user_id][$instance['term']['month']] = 1;
-                    $instMonthIndex = array_search($instance['term']['month'],$months);
-                    if($instMonthIndex <= 10){
-                        $assigned[$model->user_id][$months[$instMonthIndex+1]] = 1;
+                    $instMonthIndex = array_search($instance['term']['month'], $months);
+                    if ($instMonthIndex <= 10) {
+                        $assigned[$model->user_id][$months[$instMonthIndex + 1]] = 1;
                     }
-                    if($instMonthIndex <= 9){
-                        $assigned[$model->user_id][$months[$instMonthIndex+2]] = 1;
+                    if ($instMonthIndex <= 9) {
+                        $assigned[$model->user_id][$months[$instMonthIndex + 2]] = 1;
                     }
-                }else{
-                    foreach($qualified[$instance['subject']['code']] as $lecturer){ //iterate through array of qualified lecturers and check if possible to assign 
+                } else {
+                    foreach ($qualified[$instance['subject']['code']] as $lecturer) { //iterate through array of qualified lecturers and check if possible to assign
 
-                        if($instance['user_id']==null){
-                            $instMonthIndex = array_search($instance['term']['month'],$months);
+                        if ($instance['user_id'] == null) {
+                            $instMonthIndex = array_search($instance['term']['month'], $months);
 
-                            if(
-                            $assigned[$lecturer['id']][$months[$instMonthIndex]] < $lecturer['maxLoad']*5 &&
-                            $assigned[$lecturer['id']][$months[$instMonthIndex+1<11?$instMonthIndex+1:11]] < $lecturer['maxLoad']*5 &&
-                            $assigned[$lecturer['id']][$months[$instMonthIndex+2<11?$instMonthIndex+1:11]] < $lecturer['maxLoad']*5
-                            ){ 
+                            if (
+                                $assigned[$lecturer['id']][$months[$instMonthIndex]] < $lecturer['maxLoad'] * 5 &&
+                                $assigned[$lecturer['id']][$months[$instMonthIndex + 1 < 11 ? $instMonthIndex + 1 : 11]] < $lecturer['maxLoad'] * 5 &&
+                                $assigned[$lecturer['id']][$months[$instMonthIndex + 2 < 11 ? $instMonthIndex + 1 : 11]] < $lecturer['maxLoad'] * 5
+                            ) {
                                 $assigned[$lecturer['id']][$instance['term']['month']] += 1;
-                                if($instMonthIndex+1 < 12){
-                                    $assigned[$lecturer['id']][$months[$instMonthIndex+1]] += 1;
+                                if ($instMonthIndex + 1 < 12) {
+                                    $assigned[$lecturer['id']][$months[$instMonthIndex + 1]] += 1;
                                 }
-                                if($instMonthIndex+2 < 12){
-                                    $assigned[$lecturer['id']][$months[$instMonthIndex+2]] += 1;
+                                if ($instMonthIndex + 2 < 12) {
+                                    $assigned[$lecturer['id']][$months[$instMonthIndex + 2]] += 1;
                                 }
 
                                 $model = SubjectInstance::find($instance['id']);
                                 $model->user_id = $lecturer['id'];
-                                if($model->save()){
+                                if ($model->save()) {
                                     $instance['user_id'] = $lecturer['id'];
                                 }
-                            } 
-                        } 
+                            }
+                        }
                     }
                 }
             }
         }
-        return redirect('/manager/schedule'); 
+
+        return redirect('/manager/schedule');
     }
 }

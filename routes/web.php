@@ -40,7 +40,7 @@ Route::get('manager/users/edit/{id}', [UserController::class, 'edit'])->middlewa
 Route::post('manager/users/edit/{id}', [UserController::class, 'update'])->middleware('auth:1');
 Route::get('manager/users/add', [UserController::class, 'create'])->middleware('auth:1');
 Route::post('manager/users/add', [UserController::class, 'store'])->middleware('auth:1');
-Route::get('manager/users/delete/{id}', [UserController::class, 'destroy'])->middleware('auth:1'); 
+Route::get('manager/users/delete/{id}', [UserController::class, 'destroy'])->middleware('auth:1');
 Route::get('manager/autoAssign', [ScheduleController::class, 'autoAssign'])->middleware('auth:1');
 
 Route::post('instance/create', [ScheduleController::class, 'storeInstance'])->middleware('auth:1');
