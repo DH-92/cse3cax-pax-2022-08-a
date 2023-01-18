@@ -197,38 +197,7 @@ class ScheduleController extends Controller
 
                         if($instance['user_id']==null){
                             $instMonthIndex = array_search($instance['term']['month'],$months);
-                            // if(!array_key_exists($lecturer['id'], $assigned)){
-                            //     $assigned[$lecturer['id']][$instance['term']['month']] = 1;
-                            //     if($instMonthIndex+1 < 12){
-                            //         $assigned[$lecturer['id']][$months[$instMonthIndex+1]] = 1;
-                            //     }
-                            //     if($instMonthIndex+2 < 12){
-                            //         $assigned[$lecturer['id']][$months[$instMonthIndex+2]] = 1;
-                            //     }
 
-                            //     $model = SubjectInstance::find($instance['id']);
-                            //     $model->user_id = $lecturer['id'];
-                            //     if($model->save()){
-                            //         $instance['user_id'] = $lecturer['id'];
-                            //     }
-
-                            // }elseif(!array_key_exists($months[$instMonthIndex],$assigned[$lecturer['id']])){
-
-                            //     $assigned[$lecturer['id']][$instance['term']['month']] = 1;
-                            //     if($instMonthIndex+1 < 12){
-                            //         $assigned[$lecturer['id']][$months[$instMonthIndex+1]] = 1;
-                            //     }
-                            //     if($instMonthIndex+2 < 12){
-                            //         $assigned[$lecturer['id']][$months[$instMonthIndex+2]] = 1;
-                            //     }
-
-                            //     $model = SubjectInstance::find($instance['id']);
-                            //     $model->user_id = $lecturer['id'];
-                            //     if($model->save()){
-                            //         $instance['user_id'] = $lecturer['id'];
-                            //     }
-
-                            // }else
                             if(
                             $assigned[$lecturer['id']][$months[$instMonthIndex]] < $lecturer['maxLoad']*5 &&
                             $assigned[$lecturer['id']][$months[$instMonthIndex+1<11?$instMonthIndex+1:11]] < $lecturer['maxLoad']*5 &&
