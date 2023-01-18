@@ -168,16 +168,16 @@ class ScheduleController extends Controller
         }
         $grouped = $instances->groupBy('subject_id');
         $instance_arr = $grouped->toArray();
-        array_multiSort($qualified, $instance_arr);// SORT_ASC
+        array_multiSort($qualified, $instance_arr);// SORT_ASC, sort array of subjects by the number of lecturers who are able to take the subject
 
-        $assigned = [];
-        foreach($qualified as $s){
+        $assigned = []; //array to track lecturer load as simple int, assigning lecturer to 1 instance adds 1 to the coresponding months the subject runs for 
+        foreach($qualified as $s){ 
             foreach($s as $l){
                 $assigned[$l['id']] = ["JAN"=>0, "FEB"=>0, "MAR"=>0, "APR"=>0, "MAY"=>0, "JUN"=>0, "JUL"=>0, "AUG"=>0, "SEP"=>0, "OCT"=>0, "NOV"=>0, "DEC"=>0];
             }
         }
 
-        foreach($instance_arr as $subject){
+        foreach($instance_arr as $subject){ //iterate through array of subjects, try to assign lecturers
             foreach($subject as $instance){
                 if(count($qualified[$instance['subject']['code']]) == 1){ //only one lecturer is qualified, assign to instance
                     $model = SubjectInstance::find($instance['id']);
@@ -193,7 +193,7 @@ class ScheduleController extends Controller
                         $assigned[$model->user_id][$months[$instMonthIndex+2]] = 1;
                     }
                 }else{
-                    foreach($qualified[$instance['subject']['code']] as $lecturer){
+                    foreach($qualified[$instance['subject']['code']] as $lecturer){ //iterate through array of qualified lecturers and check if possible to assign 
 
                         if($instance['user_id']==null){
                             $instMonthIndex = array_search($instance['term']['month'],$months);
