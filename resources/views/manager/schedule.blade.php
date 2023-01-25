@@ -80,6 +80,10 @@
     <button id="publish" type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#modal">
         Publish Schedule
     </button>
+    <a href="autoAssign" class="btn btn-primary">Auto-assign Lecturers</a>
+</div>
+<div class="col-2 offset-6 text-center">
+         
 </div>
 <div class="manager-schedule container-fluid border border-dark">
     <div class="row">
